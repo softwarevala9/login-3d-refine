@@ -288,7 +288,7 @@ function NexusLogin() {
       </div>
 
       {/* Main grid — one cohesive surface, never taller than the viewport */}
-      <div className="relative z-10 mx-auto grid w-full min-h-0 max-w-[1600px] flex-1 grid-cols-1 gap-3 px-4 py-3 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
+      <div className="relative z-10 mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-3 px-4 py-3 lg:min-h-0 lg:flex-1 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
         <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_120ms_cubic-bezier(.2,.7,.2,1)_both]">
           <LeftPanel />
         </div>
@@ -583,7 +583,7 @@ function CenterPanel(props: {
         <span aria-hidden className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.72 0.20 330 / 0.38), transparent 70%)" }} />
         <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.78 0.16 75 / 0.26), transparent 70%)" }} />
 
-        <div className="relative flex min-h-0 flex-1 flex-col lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="relative flex flex-col lg:min-h-0 lg:flex-1 lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Brand header — hero logo treatment */}
         <div className="relative px-6 pt-5">
           <div className="flex items-start justify-between">
