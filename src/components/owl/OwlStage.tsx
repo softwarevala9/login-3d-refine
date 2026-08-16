@@ -1,14 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import idleMp4 from "@/assets/owl-nx-idle.mp4.asset.json";
-import greetMp4 from "@/assets/owl-nx-celebrate.mp4.asset.json";
-import curiousMp4 from "@/assets/owl-nx-curious.mp4.asset.json";
-import coverMp4 from "@/assets/owl-nx-cover.mp4.asset.json";
-import successMp4 from "@/assets/owl-nx-celebrate.mp4.asset.json";
-const idleWebm = idleMp4;
-const greetWebm = greetMp4;
-const curiousWebm = curiousMp4;
-const coverWebm = coverMp4;
-const successWebm = successMp4;
+
+const idleMp4 = { url: "/owl2/owl2-idle.mp4" };
+const idleWebm = { url: "/owl2/owl2-idle.webm" };
+const greetMp4 = { url: "/owl2/owl2-greet.mp4" };
+const greetWebm = { url: "/owl2/owl2-greet.webm" };
+const curiousMp4 = { url: "/owl2/owl2-curious.mp4" };
+const curiousWebm = { url: "/owl2/owl2-curious.webm" };
+const coverMp4 = { url: "/owl2/owl2-cover.mp4" };
+const coverWebm = { url: "/owl2/owl2-cover.webm" };
+const successMp4 = { url: "/owl2/owl2-success.mp4" };
+const successWebm = { url: "/owl2/owl2-success.webm" };
+
 
 
 /**
