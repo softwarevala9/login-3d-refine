@@ -78,8 +78,11 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
       // "hide" (eyes covered) must be instant — privacy beats gesture continuity
       if (now < lockUntil.current && want !== "hide" && PRIORITY[want] <= PRIORITY[cur]) return;
 
-      // never show a clip that is not fully buffered — prevents the hitch
-      if (!ready[want] && want !== "idle") return;
+      // never show a clip that has no frames yet — read the element directly so
+      // a missed `canplaythrough` event can never strand a reaction
+      const wantEl = videoRefs.current[want];
+      if (want !== "idle" && !ready[want] && (wantEl?.readyState ?? 0) < 2) return;
+
 
       activeRef.current = want;
       setActive(want);
