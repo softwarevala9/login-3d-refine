@@ -776,7 +776,7 @@ function CenterPanel(props: {
         </form>
 
         {/* Divider */}
-        <div className="px-7 pt-4">
+        <div className="px-6 pt-3">
           <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-white/40">
             <span className="h-px flex-1 bg-white/10" />
             or continue with
@@ -785,7 +785,7 @@ function CenterPanel(props: {
         </div>
 
         {/* Enterprise providers */}
-        <div className="grid grid-cols-2 gap-2 px-7 pt-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 px-6 pt-2.5 sm:grid-cols-4">
           {([
             { label: "Google", letter: "G", provider: "google" },
             { label: "Microsoft", letter: "M", provider: "microsoft" },
@@ -795,30 +795,31 @@ function CenterPanel(props: {
             <button key={p.label} type="button"
               onClick={() => (p.provider ? onOAuth(p.provider) : setMethod("sso"))}
               disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2.5 text-[12px] font-medium text-white/80 ring-1 ring-white/10 transition-all hover:bg-white/[0.08] disabled:opacity-50">
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2 text-[12px] font-medium text-white/80 shadow-[inset_0_1px_0_oklch(1_0_0/0.10),0_12px_24px_-18px_oklch(0_0_0/0.9)] ring-1 ring-white/10 transition-all hover:-translate-y-px hover:bg-white/[0.08] active:translate-y-0 disabled:opacity-50">
               <span className="grid size-5 place-items-center rounded-md bg-white/10 text-[11px] font-bold">{p.letter || "⌥"}</span>
               {p.label}
             </button>
           ))}
         </div>
 
-
         {/* Security strip */}
-        <div className="mt-6 grid grid-cols-3 gap-px bg-white/10 px-px pb-px">
+        <div className="mt-4 grid shrink-0 grid-cols-3 gap-px bg-white/10 px-px pb-px">
           {[
             { icon: ShieldCheck, k: "Security", v: "Healthy" },
             { icon: Fingerprint, k: "Last sign-in", v: "Just now · this device" },
             { icon: Globe, k: "Region", v: "Auto-routed · EU-W" },
           ].map((s) => (
-            <div key={s.k} className="bg-[oklch(0.14_0.02_265)] px-4 py-3">
-              <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-white/45">
+            <div key={s.k} className="bg-[oklch(0.14_0.02_265)] px-3.5 py-2.5">
+              <div className="flex items-center gap-1.5 text-[9.5px] uppercase tracking-[0.16em] text-white/45">
                 <s.icon className="size-3" /> {s.k}
               </div>
-              <p className="mt-0.5 truncate text-[12px] font-medium text-white/85">{s.v}</p>
+              <p className="mt-0.5 truncate text-[11.5px] font-medium text-white/85">{s.v}</p>
             </div>
           ))}
         </div>
+        </div>
       </GlassCard>
+
     </section>
   );
 }
