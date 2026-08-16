@@ -250,7 +250,7 @@ function NexusLogin() {
   const ai = AI_LINES[stage];
 
   return (
-    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-[oklch(0.10_0.02_265)] text-[oklch(0.96_0.01_260)]">
+    <div className="relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden lg:h-[100dvh] lg:overflow-hidden bg-[oklch(0.10_0.02_265)] text-[oklch(0.96_0.01_260)]">
       <NexusBackground />
       <CursorSpotlight />
 
@@ -288,7 +288,7 @@ function NexusLogin() {
       </div>
 
       {/* Main grid — one cohesive surface, never taller than the viewport */}
-      <div className="relative z-10 mx-auto grid w-full min-h-0 max-w-[1600px] flex-1 grid-cols-1 gap-3 overflow-y-auto px-4 py-3 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
+      <div className="relative z-10 mx-auto grid w-full min-h-0 max-w-[1600px] flex-1 grid-cols-1 gap-3 px-4 py-3 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
         <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_120ms_cubic-bezier(.2,.7,.2,1)_both]">
           <LeftPanel />
         </div>
@@ -577,13 +577,13 @@ function CenterPanel(props: {
   const methodMeta = METHODS.find((m) => m.id === method)!;
 
   return (
-    <section className="flex h-full min-h-0 min-w-0 flex-col items-center justify-center">
-      <GlassCard className="relative flex max-h-full w-full max-w-[540px] flex-col overflow-hidden p-0 shadow-[0_60px_120px_-40px_oklch(0_0_0/0.95),0_10px_30px_-12px_oklch(0_0_0/0.6),inset_0_1px_0_oklch(1_0_0/0.12),inset_0_-1px_0_oklch(0_0_0/0.5)]">
+    <section className="flex min-h-0 min-w-0 flex-col items-center justify-center lg:h-full">
+      <GlassCard className="relative flex w-full max-w-[540px] lg:max-h-full flex-col overflow-hidden p-0 shadow-[0_60px_120px_-40px_oklch(0_0_0/0.95),0_10px_30px_-12px_oklch(0_0_0/0.6),inset_0_1px_0_oklch(1_0_0/0.12),inset_0_-1px_0_oklch(0_0_0/0.5)]">
         {/* Ambient corner glows */}
         <span aria-hidden className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.72 0.20 330 / 0.38), transparent 70%)" }} />
         <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.78 0.16 75 / 0.26), transparent 70%)" }} />
 
-        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="relative flex min-h-0 flex-1 flex-col lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Brand header — hero logo treatment */}
         <div className="relative px-6 pt-5">
           <div className="flex items-start justify-between">
@@ -1006,10 +1006,10 @@ function RightPanel({ ai, stage, voice, setVoice }: {
   }, [ai.line, voice]);
 
   return (
-    <aside className="flex h-full min-h-0 flex-col justify-center">
+    <aside className="flex min-h-0 flex-col justify-center lg:h-full">
       <GlassCard className="w-full overflow-hidden p-0">
         {/* Tall hero so upper body (face, neck, shoulders, chest, ID) is visible */}
-        <div className="relative h-[460px] overflow-hidden">
+        <div className="relative h-[230px] overflow-hidden sm:h-[300px] lg:h-[460px]">
           <AIAvatar stage={stage} />
         </div>
         <div className="space-y-3 px-5 pb-4 pt-3">
