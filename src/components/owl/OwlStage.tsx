@@ -62,12 +62,16 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
 
   useEffect(() => {
     pending.current = state;
+    // Any deliberate user-driven reaction (password focus, celebration, …)
+    // immediately retires the greeting so it can never delay a reaction.
+    if (state !== "idle") greetDone.current = true;
 
     const resolve = () => {
       const now = performance.now();
       const want: ClipKey = !greetDone.current ? "greet" : pending.current;
       const cur = activeRef.current;
       if (want === cur) return;
+
 
       // don't cut a running reaction off mid-gesture unless something with a
       // strictly higher priority asks for the stage
