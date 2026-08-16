@@ -483,8 +483,8 @@ function ShowcaseSlider() {
   }, []);
 
   return (
-    <GlassCard className="relative overflow-hidden p-0">
-      <div className="relative h-[190px]">
+    <GlassCard className="relative h-full overflow-hidden p-0">
+      <div className="relative h-full min-h-[150px]">
         {SLIDES.map((s, idx) => (
           <div
             key={s.tag}
