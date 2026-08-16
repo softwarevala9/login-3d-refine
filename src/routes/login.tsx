@@ -1011,22 +1011,22 @@ function RightPanel({ ai, stage, voice, setVoice, setStage }: {
   const [showHuman, setShowHuman] = useState(false);
 
   return (
-    <aside className="flex flex-col gap-3">
-      <GlassCard className="overflow-hidden p-0">
-        {/* Tall hero so upper body (face, neck, shoulders, chest, ID) is visible */}
-        <div className="relative h-[460px] overflow-hidden">
+    <aside className="flex h-full min-h-0 flex-col gap-2.5">
+      <GlassCard className="flex min-h-0 flex-1 flex-col overflow-hidden p-0">
+        {/* Mascot stage — flexes with the viewport, never cropped away */}
+        <div className="relative min-h-[220px] flex-1 overflow-hidden">
           <AIAvatar stage={stage} />
         </div>
-        <div className="space-y-3 px-5 pb-4 pt-3">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
-              <p className="mt-0.5 text-[15px] font-semibold text-white">Vala · {ai.mood}</p>
+        <div className="shrink-0 space-y-2 px-4 pb-3 pt-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="min-w-0">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
+              <p className="mt-0.5 truncate text-[14px] font-semibold text-white">Vala · {ai.mood}</p>
             </div>
             <button
               onClick={() => setVoice(!voice)}
               className={[
-                "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] ring-1 transition-colors",
+                "inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] ring-1 transition-colors",
                 voice ? "bg-violet-500/20 text-violet-200 ring-violet-400/30" : "bg-white/5 text-white/65 ring-white/10",
               ].join(" ")}
             >
@@ -1035,12 +1035,13 @@ function RightPanel({ ai, stage, voice, setVoice, setStage }: {
             </button>
           </div>
 
-          <div className="relative rounded-2xl bg-white/[0.05] p-3 ring-1 ring-white/10">
+          <div className="relative rounded-2xl bg-white/[0.05] p-2.5 shadow-[inset_0_1px_0_oklch(1_0_0/0.10)] ring-1 ring-white/10">
             <div className="absolute -top-1.5 left-5 size-3 rotate-45 bg-white/[0.05] ring-1 ring-white/10" />
-            <p className="text-[13px] leading-relaxed text-white/85">{ai.line}</p>
+            <p className="line-clamp-3 text-[12.5px] leading-relaxed text-white/85">{ai.line}</p>
           </div>
         </div>
       </GlassCard>
+
 
       {/* Collapsible: Quick help shortcuts */}
       <CollapsibleCard
