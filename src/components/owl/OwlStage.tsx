@@ -75,7 +75,8 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
 
       // don't cut a running reaction off mid-gesture unless something with a
       // strictly higher priority asks for the stage
-      if (now < lockUntil.current && PRIORITY[want] <= PRIORITY[cur]) return;
+      // "hide" (eyes covered) must be instant — privacy beats gesture continuity
+      if (now < lockUntil.current && want !== "hide" && PRIORITY[want] <= PRIORITY[cur]) return;
 
       // never show a clip that is not fully buffered — prevents the hitch
       if (!ready[want] && want !== "idle") return;
@@ -110,7 +111,7 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
     };
 
     resolve();
-    const id = window.setInterval(resolve, 120);
+    const id = window.setInterval(resolve, 50);
     return () => window.clearInterval(id);
   }, [state, ready]);
 
