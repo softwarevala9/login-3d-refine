@@ -1007,16 +1007,16 @@ function RightPanel({ ai, stage, voice, setVoice }: {
 
   return (
     <aside className="flex h-full min-h-0 flex-col justify-center">
-      <GlassCard className="flex max-h-full w-full flex-col overflow-hidden p-0">
-        {/* Mascot stage — square-ish, balanced against the sign-in card */}
-        <div className="relative aspect-square max-h-[46vh] min-h-[200px] w-full overflow-hidden">
+      <GlassCard className="w-full overflow-hidden p-0">
+        {/* Tall hero so upper body (face, neck, shoulders, chest, ID) is visible */}
+        <div className="relative h-[460px] overflow-hidden">
           <AIAvatar stage={stage} />
         </div>
-        <div className="shrink-0 space-y-2 px-4 pb-3 pt-2.5">
-          <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
-              <p className="mt-0.5 truncate text-[14px] font-semibold text-white">Vala · {ai.mood}</p>
+        <div className="space-y-3 px-5 pb-4 pt-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
+              <p className="mt-0.5 text-[15px] font-semibold text-white">Vala · {ai.mood}</p>
             </div>
             <button
               onClick={() => setVoice(!voice)}
@@ -1030,14 +1030,15 @@ function RightPanel({ ai, stage, voice, setVoice }: {
             </button>
           </div>
 
-          <div className="relative rounded-2xl bg-white/[0.05] p-2.5 shadow-[inset_0_1px_0_oklch(1_0_0/0.10)] ring-1 ring-white/10">
+          <div className="relative rounded-2xl bg-white/[0.05] p-3 shadow-[inset_0_1px_0_oklch(1_0_0/0.10)] ring-1 ring-white/10">
             <div className="absolute -top-1.5 left-5 size-3 rotate-45 bg-white/[0.05] ring-1 ring-white/10" />
-            <p className="line-clamp-3 text-[12.5px] leading-relaxed text-white/85">{ai.line}</p>
+            <p className="text-[13px] leading-relaxed text-white/85">{ai.line}</p>
           </div>
         </div>
       </GlassCard>
     </aside>
   );
+
 }
 
 
