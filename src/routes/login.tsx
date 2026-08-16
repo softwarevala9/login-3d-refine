@@ -250,34 +250,34 @@ function NexusLogin() {
   const ai = AI_LINES[stage];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[oklch(0.10_0.02_265)] text-[oklch(0.96_0.01_260)]">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-[oklch(0.10_0.02_265)] text-[oklch(0.96_0.01_260)]">
       <NexusBackground />
       <CursorSpotlight />
 
 
       {/* Top strip — security telemetry */}
-      <div className="relative z-20 mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6 pt-5 [animation:nx-fade-down_700ms_ease-out_both]">
-        <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-white/60">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-md">
+      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-between gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
+        <div className="flex min-w-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-white/60">
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
             <span className="relative size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/80">
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
             </span>
             Nexus OS · Operational
           </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-md">
+          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
             <Server className="size-3" /> 42 regions
           </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-md">
+          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
             <ShieldCheck className="size-3" /> 2FA active
           </span>
-          <span className="hidden lg:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-md">
+          <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
             <Wifi className="size-3" /> Trusted device
           </span>
         </div>
-        <div className="flex items-center gap-2 text-[11px] text-white/70">
+        <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
           <button
             onClick={() => setLang((l) => (l === "EN" ? "हिं" : l === "हिं" ? "العربية" : "EN"))}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 ring-1 ring-white/10 backdrop-blur-md transition-all hover:bg-white/[0.12] hover:ring-white/20"
+            className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md transition-all hover:bg-white/[0.12] hover:ring-white/20"
           >
             <Languages className="size-3" /> {lang}
           </button>
@@ -287,12 +287,12 @@ function NexusLogin() {
         </div>
       </div>
 
-      {/* Main grid */}
-      <div className="relative z-10 mx-auto grid max-w-[1600px] grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[320px_minmax(0,1fr)_360px] xl:gap-8">
-        <div className="[animation:nx-fade-up_900ms_120ms_cubic-bezier(.2,.7,.2,1)_both]">
+      {/* Main grid — one cohesive surface, never taller than the viewport */}
+      <div className="relative z-10 mx-auto grid w-full min-h-0 max-w-[1600px] flex-1 grid-cols-1 gap-3 overflow-y-auto px-4 py-3 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
+        <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_120ms_cubic-bezier(.2,.7,.2,1)_both]">
           <LeftPanel />
         </div>
-        <div className="[animation:nx-fade-up_900ms_220ms_cubic-bezier(.2,.7,.2,1)_both]">
+        <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_220ms_cubic-bezier(.2,.7,.2,1)_both]">
           <CenterPanel
             method={method} setMethod={setMethod}
             identifier={identifier} setIdentifier={setIdentifier}
@@ -311,18 +311,17 @@ function NexusLogin() {
             stage={stage}
           />
         </div>
-        <div className="[animation:nx-fade-up_900ms_340ms_cubic-bezier(.2,.7,.2,1)_both]">
+        <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_340ms_cubic-bezier(.2,.7,.2,1)_both]">
           <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} setStage={setStage} />
         </div>
       </div>
 
-
-
-      <footer className="relative z-10 mx-auto max-w-[1600px] px-6 pb-6 pt-2 text-center text-[11px] text-white/40">
-        Software Vala Nexus OS · A global enterprise operating system · 12,000+ products · 1,000,000+ operators
+      <footer className="relative z-10 mx-auto w-full max-w-[1600px] shrink-0 truncate px-6 pb-2 text-center text-[10px] text-white/40">
+        Software Vala Nexus OS · A global enterprise operating system
         <span className="mx-2 text-white/25">·</span>
         <Link to="/chat" className="text-white/60 hover:text-white/90 underline underline-offset-2">Internal Chat</Link>
       </footer>
+
 
 
       <style>{`
