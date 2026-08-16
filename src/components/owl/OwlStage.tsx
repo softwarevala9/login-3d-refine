@@ -200,7 +200,9 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
             className="absolute inset-0 size-full object-cover transition-opacity duration-500 ease-out"
             style={{ opacity: key === active ? 1 : 0 }}
           >
+            <source src={CLIPS[key].webm} type="video/webm" />
             <source src={CLIPS[key].mp4} type="video/mp4" />
+
           </video>
         ))}
       </div>
