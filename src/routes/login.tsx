@@ -524,60 +524,25 @@ function ShowcaseSlider() {
 
 function LeftPanel() {
   return (
-    <aside className="hidden lg:flex flex-col gap-4">
-      <ShowcaseSlider />
+    <aside className="hidden h-full min-h-0 lg:flex flex-col gap-3">
+      <div className="min-h-0 flex-1">
+        <ShowcaseSlider />
+      </div>
 
-      <GlassCard className="p-4">
-        <div className="flex items-center justify-between">
-          <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">Ecosystem · Opportunities</p>
-          <span className="rounded-full bg-emerald-400/15 px-2 py-0.5 text-[10px] font-medium text-emerald-300 ring-1 ring-emerald-400/30">
-            Live hiring
-          </span>
-        </div>
-        <ul className="mt-3 space-y-1.5">
-          {OPPORTUNITIES.map((o) => (
-            <li key={o.role} className="group flex items-center gap-3 rounded-xl px-2.5 py-2 hover:bg-white/[0.04] transition-colors">
-              <span className="grid size-9 place-items-center rounded-lg ring-1 ring-white/10" style={{ background: o.grad }}>
-                <o.icon className="size-4 text-white" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-medium text-white/90">{o.role}</p>
-                <p className="truncate text-[11px] text-white/50">{o.team} · {o.level}</p>
-              </div>
-              <ChevronRight className="size-4 text-white/30 transition-transform group-hover:translate-x-0.5 group-hover:text-white/70" />
-            </li>
-          ))}
-        </ul>
-      </GlassCard>
-
-      <GlassCard className="p-4">
-        <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">Featured programs</p>
-        <ul className="mt-3 space-y-2.5">
-          {PROGRAMS.map((p) => (
-            <li key={p.title} className="rounded-xl bg-white/[0.03] p-3 ring-1 ring-white/10">
-              <div className="flex items-center gap-2">
-                <span className="rounded-full bg-violet-400/15 px-2 py-0.5 text-[10px] font-medium text-violet-300 ring-1 ring-violet-400/30">
-                  {p.tag}
-                </span>
-              </div>
-              <p className="mt-1.5 text-[13px] font-medium text-white/90">{p.title}</p>
-              <p className="text-[11px] text-white/55">{p.desc}</p>
-            </li>
-          ))}
-        </ul>
-      </GlassCard>
-
-      <GlassCard className="p-4">
-        <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">Global pulse</p>
-        <div className="mt-3 grid grid-cols-3 gap-2 text-center">
+      <GlassCard className="shrink-0 p-3.5">
+        <p className="text-[10px] uppercase tracking-[0.18em] text-white/55">Global pulse</p>
+        <div className="mt-2.5 grid grid-cols-3 gap-2 text-center">
           {[
             { v: "42", k: "Regions" },
             { v: "1M+", k: "Operators" },
             { v: "12K+", k: "Products" },
           ].map((m) => (
-            <div key={m.k} className="rounded-lg bg-white/[0.03] py-2 ring-1 ring-white/10">
-              <p className="text-base font-semibold tracking-tight text-white">{m.v}</p>
-              <p className="text-[10px] uppercase tracking-wider text-white/50">{m.k}</p>
+            <div
+              key={m.k}
+              className="rounded-lg bg-white/[0.03] py-2 shadow-[inset_0_1px_0_oklch(1_0_0/0.10),0_10px_20px_-16px_oklch(0_0_0/0.9)] ring-1 ring-white/10"
+            >
+              <p className="text-[15px] font-semibold tracking-tight text-white">{m.v}</p>
+              <p className="text-[9.5px] uppercase tracking-wider text-white/50">{m.k}</p>
             </div>
           ))}
         </div>
