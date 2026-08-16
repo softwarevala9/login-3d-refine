@@ -577,39 +577,41 @@ function CenterPanel(props: {
   const methodMeta = METHODS.find((m) => m.id === method)!;
 
   return (
-    <section className="flex min-w-0 flex-col items-center justify-start">
-      <GlassCard className="relative w-full max-w-[540px] overflow-hidden p-0">
+    <section className="flex h-full min-h-0 min-w-0 flex-col items-center justify-center">
+      <GlassCard className="relative flex max-h-full w-full max-w-[540px] flex-col overflow-hidden p-0 shadow-[0_60px_120px_-40px_oklch(0_0_0/0.95),0_10px_30px_-12px_oklch(0_0_0/0.6),inset_0_1px_0_oklch(1_0_0/0.12),inset_0_-1px_0_oklch(0_0_0/0.5)]">
         {/* Ambient corner glows */}
         <span aria-hidden className="pointer-events-none absolute -top-24 -right-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.72 0.20 330 / 0.38), transparent 70%)" }} />
         <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-20 size-64 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, oklch(0.78 0.16 75 / 0.26), transparent 70%)" }} />
 
+        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Brand header — hero logo treatment */}
-        <div className="relative px-7 pt-7">
+        <div className="relative px-6 pt-5">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <BrandLogo variant="round" size={52} />
+              <BrandLogo variant="round" size={46} />
               <div className="flex flex-col">
-                <BrandLogo variant="long" size={32} />
-                <span className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/45">Nexus OS · v4.2</span>
+                <BrandLogo variant="long" size={28} />
+                <span className="mt-1 text-[9.5px] uppercase tracking-[0.22em] text-white/45">Nexus OS · v4.2</span>
               </div>
             </div>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400/15 to-amber-300/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-amber-200 ring-1 ring-amber-300/30 backdrop-blur-md">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400/15 to-amber-300/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-amber-200 shadow-[inset_0_1px_0_oklch(1_0_0/0.15)] ring-1 ring-amber-300/30 backdrop-blur-md">
               <Crown className="size-3 text-amber-300" /> Founder
             </span>
           </div>
-          <div className="mt-7">
-            <h1 className="text-[28px] font-semibold leading-[1.1] tracking-tight text-white">
+          <div className="mt-4">
+            <h1 className="text-[clamp(20px,2.2vh+10px,26px)] font-semibold leading-[1.1] tracking-tight text-white [text-shadow:0_2px_18px_oklch(0_0_0/0.6)]">
               Welcome back,{" "}
               <span className="bg-gradient-to-r from-fuchsia-200 via-rose-200 to-amber-200 bg-clip-text text-transparent">Boss</span>
             </h1>
-            <p className="mt-1.5 text-[13px] text-white/55">
+            <p className="mt-1 text-[12.5px] text-white/55">
               Sign in to enter the Software Vala universe.
             </p>
           </div>
         </div>
 
         {/* Method chips */}
-        <div className="mt-5 px-7">
+        <div className="mt-3.5 px-6">
+
           <div className="flex flex-wrap gap-1.5">
             {METHODS.map((m) => {
               const active = m.id === method;
