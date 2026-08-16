@@ -1129,11 +1129,14 @@ function AIAvatar({ stage }: { stage: AIState }) {
             ? "hide"
             : stage === "success" || stage === "first" || stage === "vip"
               ? "celebrate"
-              : stage === "typingUser" || stage === "otp" || stage === "qr"
+              : stage === "typingUser" || stage === "otp" || stage === "qr" ||
+                  stage === "wrongPass" || stage === "locked" ||
+                  stage === "securityAlert" || stage === "serverError"
                 ? "curious"
                 : "idle"
         }
       />
+
 
 
 
