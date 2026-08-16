@@ -70,7 +70,6 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
       const now = performance.now();
       const want: ClipKey = !greetDone.current ? "greet" : pending.current;
       const cur = activeRef.current;
-      console.log("[owl]", state, want, cur, (videoRefs.current[want]?.readyState ?? -1));
       if (want === cur) return;
 
 
