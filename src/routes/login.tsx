@@ -1009,7 +1009,7 @@ function RightPanel({ ai, stage, voice, setVoice }: {
     <aside className="flex min-h-0 flex-col justify-center lg:h-full">
       <GlassCard className="w-full overflow-hidden p-0">
         {/* Tall hero so upper body (face, neck, shoulders, chest, ID) is visible */}
-        <div className="relative h-[230px] overflow-hidden sm:h-[300px] lg:h-[460px]">
+        <div className="relative h-[190px] overflow-hidden sm:h-[280px] lg:h-[460px]">
           <AIAvatar stage={stage} />
         </div>
         <div className="space-y-3 px-5 pb-4 pt-3">
