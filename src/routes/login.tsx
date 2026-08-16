@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
-  Lock, Globe, Mic, MicOff, MessageSquare, Sparkles, ChevronRight, Building2,
-  Code2, Bot, BarChart3, Search, Briefcase, LifeBuoy, Radio, Wifi, Server,
+  Lock, Globe, Mic, MicOff, MessageSquare, Sparkles, Building2,
+  Radio, Wifi, Server,
   CheckCircle2, AlertTriangle, Languages, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand/BrandLogo";
