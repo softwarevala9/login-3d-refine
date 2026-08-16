@@ -1121,18 +1121,19 @@ function CollapsibleCard({
   children: React.ReactNode;
 }) {
   return (
-    <GlassCard className="overflow-hidden">
+    <GlassCard className="shrink-0 overflow-hidden">
       <button
         onClick={onToggle}
-        className="flex w-full items-center justify-between px-4 py-2.5 text-left"
+        className="flex w-full items-center justify-between px-4 py-2 text-left"
       >
-        <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
+        <span className="inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.18em] text-white/60">
           {icon}
           {label}
         </span>
         <span className={["text-white/50 transition-transform", open ? "rotate-90" : ""].join(" ")}>›</span>
       </button>
-      {open ? <div className="px-4 pb-4">{children}</div> : null}
+      {open ? <div className="max-h-[40vh] overflow-y-auto px-4 pb-3">{children}</div> : null}
+
     </GlassCard>
   );
 }
