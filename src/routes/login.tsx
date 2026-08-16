@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
-  Lock, Globe, Mic, MicOff, MessageSquare, Sparkles, Building2,
+  Lock, Globe, Mic, MicOff, Building2,
   Radio, Wifi, Server,
   CheckCircle2, AlertTriangle, Languages, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
@@ -312,7 +312,7 @@ function NexusLogin() {
           />
         </div>
         <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_340ms_cubic-bezier(.2,.7,.2,1)_both]">
-          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} setStage={setStage} />
+          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} />
         </div>
       </div>
 
@@ -975,12 +975,11 @@ function SSOPanel({ value, onChange, submitting }: { value: string; onChange: (s
 
 /* ============================ Right Panel (AI) ============================ */
 
-function RightPanel({ ai, stage, voice, setVoice, setStage }: {
+function RightPanel({ ai, stage, voice, setVoice }: {
   ai: { mood: string; line: string; tone: string };
   stage: AIState;
   voice: boolean;
   setVoice: (b: boolean) => void;
-  setStage: (s: AIState) => void;
 }) {
   // Speak the current AI line aloud when voice is on — human-like concierge.
   useEffect(() => {
@@ -1006,22 +1005,18 @@ function RightPanel({ ai, stage, voice, setVoice, setStage }: {
     };
   }, [ai.line, voice]);
 
-  const [showShortcuts, setShowShortcuts] = useState(false);
-  const [showSecurity, setShowSecurity] = useState(false);
-  const [showHuman, setShowHuman] = useState(false);
-
   return (
-    <aside className="flex h-full min-h-0 flex-col gap-2.5">
-      <GlassCard className="flex min-h-0 flex-1 flex-col overflow-hidden p-0">
-        {/* Mascot stage — flexes with the viewport, never cropped away */}
-        <div className="relative min-h-[220px] flex-1 overflow-hidden">
+    <aside className="flex h-full min-h-0 flex-col justify-center">
+      <GlassCard className="w-full overflow-hidden p-0">
+        {/* Tall hero so upper body (face, neck, shoulders, chest, ID) is visible */}
+        <div className="relative h-[460px] overflow-hidden">
           <AIAvatar stage={stage} />
         </div>
-        <div className="shrink-0 space-y-2 px-4 pb-3 pt-2.5">
-          <div className="flex items-center justify-between gap-2">
-            <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
-              <p className="mt-0.5 truncate text-[14px] font-semibold text-white">Vala · {ai.mood}</p>
+        <div className="space-y-3 px-5 pb-4 pt-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-white/55">AI Concierge</p>
+              <p className="mt-0.5 text-[15px] font-semibold text-white">Vala · {ai.mood}</p>
             </div>
             <button
               onClick={() => setVoice(!voice)}
@@ -1035,108 +1030,17 @@ function RightPanel({ ai, stage, voice, setVoice, setStage }: {
             </button>
           </div>
 
-          <div className="relative rounded-2xl bg-white/[0.05] p-2.5 shadow-[inset_0_1px_0_oklch(1_0_0/0.10)] ring-1 ring-white/10">
+          <div className="relative rounded-2xl bg-white/[0.05] p-3 shadow-[inset_0_1px_0_oklch(1_0_0/0.10)] ring-1 ring-white/10">
             <div className="absolute -top-1.5 left-5 size-3 rotate-45 bg-white/[0.05] ring-1 ring-white/10" />
-            <p className="line-clamp-3 text-[12.5px] leading-relaxed text-white/85">{ai.line}</p>
+            <p className="text-[13px] leading-relaxed text-white/85">{ai.line}</p>
           </div>
         </div>
       </GlassCard>
-
-
-      {/* Collapsible: Quick help shortcuts */}
-      <CollapsibleCard
-        label="Quick help"
-        open={showShortcuts}
-        onToggle={() => setShowShortcuts((v) => !v)}
-      >
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { id: "first", label: "First time?" },
-            { id: "reset", label: "Reset password" },
-            { id: "securityAlert", label: "Security help" },
-            { id: "multiDevice", label: "Active sessions" },
-          ].map((q) => (
-            <button key={q.id} onClick={() => setStage(q.id as AIState)}
-              className="inline-flex items-center justify-between rounded-lg bg-white/[0.04] px-3 py-2 text-[12px] text-white/75 ring-1 ring-white/10 hover:bg-white/[0.08]">
-              {q.label}
-              <Sparkles className="size-3 text-violet-300" />
-            </button>
-          ))}
-        </div>
-      </CollapsibleCard>
-
-      {/* Collapsible: Security zone */}
-      <CollapsibleCard
-        label="Security zone"
-        open={showSecurity}
-        onToggle={() => setShowSecurity((v) => !v)}
-      >
-        <ul className="space-y-2 text-[12px]">
-          {[
-            { k: "System", v: "Operational", ok: true },
-            { k: "AI Concierge", v: "Online", ok: true },
-            { k: "Server health", v: "99.998%", ok: true },
-            { k: "License", v: "Founder · Lifetime", ok: true },
-            { k: "Last login", v: "2 hours ago · Mumbai", ok: true },
-            { k: "Active sessions", v: "3 devices", ok: false },
-          ].map((s) => (
-            <li key={s.k} className="flex items-center justify-between">
-              <span className="text-white/55">{s.k}</span>
-              <span className={["inline-flex items-center gap-1.5", s.ok ? "text-emerald-300" : "text-amber-300"].join(" ")}>
-                <span className={["size-1.5 rounded-full", s.ok ? "bg-emerald-400" : "bg-amber-400"].join(" ")} />
-                {s.v}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </CollapsibleCard>
-
-      {/* Collapsible: Need a human */}
-      <CollapsibleCard
-        label="Need a human?"
-        open={showHuman}
-        onToggle={() => setShowHuman((v) => !v)}
-        icon={<MessageSquare className="size-3.5 text-white/75" />}
-      >
-        <div className="flex items-center justify-between gap-3">
-          <p className="text-[12px] text-white/70">24/7 enterprise concierge · &lt;30s response</p>
-          <Link to="/chat" className="rounded-lg bg-white/[0.06] px-2.5 py-1.5 text-[11px] text-white/80 ring-1 ring-white/10 hover:bg-white/[0.1]">Open</Link>
-        </div>
-      </CollapsibleCard>
     </aside>
   );
+
 }
 
-function CollapsibleCard({
-  label,
-  open,
-  onToggle,
-  icon,
-  children,
-}: {
-  label: string;
-  open: boolean;
-  onToggle: () => void;
-  icon?: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  return (
-    <GlassCard className="shrink-0 overflow-hidden">
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between px-4 py-2 text-left"
-      >
-        <span className="inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.18em] text-white/60">
-          {icon}
-          {label}
-        </span>
-        <span className={["text-white/50 transition-transform", open ? "rotate-90" : ""].join(" ")}>›</span>
-      </button>
-      {open ? <div className="max-h-[40vh] overflow-y-auto px-4 pb-3">{children}</div> : null}
-
-    </GlassCard>
-  );
-}
 
 function AIAvatar({ stage }: { stage: AIState }) {
   const accentMap: Partial<Record<AIState, string>> = {

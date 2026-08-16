@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import idleMp4 from "@/assets/owl2-idle.mp4.asset.json";
-import greetMp4 from "@/assets/owl2-greet.mp4.asset.json";
-import curiousMp4 from "@/assets/owl2-curious.mp4.asset.json";
-import coverMp4 from "@/assets/owl2-cover.mp4.asset.json";
-import successMp4 from "@/assets/owl2-success.mp4.asset.json";
-import idleWebm from "@/assets/owl2-idle.webm.asset.json";
-import greetWebm from "@/assets/owl2-greet.webm.asset.json";
-import curiousWebm from "@/assets/owl2-curious.webm.asset.json";
-import coverWebm from "@/assets/owl2-cover.webm.asset.json";
-import successWebm from "@/assets/owl2-success.webm.asset.json";
+
+const idleMp4 = { url: "/owl2/owl2-idle.mp4" };
+const idleWebm = { url: "/owl2/owl2-idle.webm" };
+const greetMp4 = { url: "/owl2/owl2-greet.mp4" };
+const greetWebm = { url: "/owl2/owl2-greet.webm" };
+const curiousMp4 = { url: "/owl2/owl2-curious.mp4" };
+const curiousWebm = { url: "/owl2/owl2-curious.webm" };
+const coverMp4 = { url: "/owl2/owl2-cover.mp4" };
+const coverWebm = { url: "/owl2/owl2-cover.webm" };
+const successMp4 = { url: "/owl2/owl2-success.mp4" };
+const successWebm = { url: "/owl2/owl2-success.webm" };
+
+
 
 /**
  * Rendered 3D character animation of the owl mascot.
@@ -199,6 +202,7 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
           >
             <source src={CLIPS[key].webm} type="video/webm" />
             <source src={CLIPS[key].mp4} type="video/mp4" />
+
           </video>
         ))}
       </div>
