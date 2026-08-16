@@ -1296,16 +1296,17 @@ function GlassCard({ className = "", children, style, ...rest }: React.HTMLAttri
       {...rest}
       className={[
         "relative rounded-2xl ring-1 ring-white/10",
-        "shadow-[0_40px_100px_-30px_oklch(0_0_0/0.8),inset_0_1px_0_oklch(1_0_0/0.08)]",
+        "shadow-[0_50px_110px_-38px_oklch(0_0_0/0.9),0_8px_24px_-14px_oklch(0_0_0/0.65),inset_0_1px_0_oklch(1_0_0/0.10),inset_0_-1px_0_oklch(0_0_0/0.45)]",
         "backdrop-blur-2xl backdrop-saturate-150",
         className,
       ].join(" ")}
       style={{
         backgroundImage:
-          "linear-gradient(180deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.015) 40%, oklch(1 0 0 / 0.025))",
+          "linear-gradient(180deg, oklch(1 0 0 / 0.07), oklch(1 0 0 / 0.015) 45%, oklch(0 0 0 / 0.10))",
         backgroundColor: "oklch(0.18 0.02 265 / 0.55)",
         ...style,
       }}
+
     >
       {/* top sheen */}
       <span aria-hidden className="pointer-events-none absolute inset-x-3 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/40 to-transparent" />
