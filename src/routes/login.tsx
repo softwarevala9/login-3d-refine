@@ -36,20 +36,8 @@ export const Route = createFileRoute("/login")({
 
 /* ============================ Data ============================ */
 
-const OPPORTUNITIES = [
-  { role: "Senior Developer", team: "Platform Core", level: "L5", icon: Code2, grad: "var(--grad-violet)" },
-  { role: "AI Engineer", team: "Nexus Intelligence", level: "L5", icon: Bot, grad: "var(--grad-cyan)" },
-  { role: "Data Scientist", team: "Insights Lab", level: "L4", icon: BarChart3, grad: "var(--grad-teal)" },
-  { role: "SEO Expert", team: "Growth", level: "L4", icon: Search, grad: "var(--grad-amber)" },
-  { role: "Sales Executive", team: "Enterprise GTM", level: "L3", icon: Briefcase, grad: "var(--grad-emerald)" },
-  { role: "Support Executive", team: "Global Care", level: "L2", icon: LifeBuoy, grad: "var(--grad-rose)" },
-] as const;
 
-const PROGRAMS = [
-  { tag: "Featured", title: "Founder Fellowship 2026", desc: "120 seats · Global cohort" },
-  { tag: "Live Hiring", title: "Nexus AI Residency", desc: "Apply by Jun 28" },
-  { tag: "Announcement", title: "v4.2 ships worldwide tonight", desc: "Multi-region rollout" },
-] as const;
+
 
 const METHODS = [
   { id: "email", label: "Email", icon: Mail },
