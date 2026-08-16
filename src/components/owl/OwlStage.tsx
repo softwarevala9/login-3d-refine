@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import idleMp4 from "@/assets/owl2-idle.mp4.asset.json";
-import greetMp4 from "@/assets/owl2-greet.mp4.asset.json";
-import curiousMp4 from "@/assets/owl2-curious.mp4.asset.json";
-import coverMp4 from "@/assets/owl2-cover.mp4.asset.json";
-import successMp4 from "@/assets/owl2-success.mp4.asset.json";
-import idleWebm from "@/assets/owl2-idle.webm.asset.json";
-import greetWebm from "@/assets/owl2-greet.webm.asset.json";
-import curiousWebm from "@/assets/owl2-curious.webm.asset.json";
-import coverWebm from "@/assets/owl2-cover.webm.asset.json";
-import successWebm from "@/assets/owl2-success.webm.asset.json";
+import idleMp4 from "@/assets/owl-nx-idle.mp4.asset.json";
+import greetMp4 from "@/assets/owl-nx-celebrate.mp4.asset.json";
+import curiousMp4 from "@/assets/owl-nx-curious.mp4.asset.json";
+import coverMp4 from "@/assets/owl-nx-cover.mp4.asset.json";
+import successMp4 from "@/assets/owl-nx-celebrate.mp4.asset.json";
+const idleWebm = idleMp4;
+const greetWebm = greetMp4;
+const curiousWebm = curiousMp4;
+const coverWebm = coverMp4;
+const successWebm = successMp4;
+
 
 /**
  * Rendered 3D character animation of the owl mascot.
@@ -48,7 +49,7 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
   const [ready, setReady] = useState<Partial<Record<ClipKey, boolean>>>({});
   const [active, setActive] = useState<ClipKey>("idle");
   const activeRef = useRef<ClipKey>("idle");
-  const greetDone = useRef(false);
+  const greetDone = useRef(true);
   const lockUntil = useRef(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
@@ -197,7 +198,6 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
             className="absolute inset-0 size-full object-cover transition-opacity duration-500 ease-out"
             style={{ opacity: key === active ? 1 : 0 }}
           >
-            <source src={CLIPS[key].webm} type="video/webm" />
             <source src={CLIPS[key].mp4} type="video/mp4" />
           </video>
         ))}
