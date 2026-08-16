@@ -62,6 +62,9 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
 
   useEffect(() => {
     pending.current = state;
+    // Any deliberate user-driven reaction (password focus, celebration, …)
+    // immediately retires the greeting so it can never delay a reaction.
+    if (state !== "idle") greetDone.current = true;
 
     const resolve = () => {
       const now = performance.now();
@@ -69,12 +72,17 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
       const cur = activeRef.current;
       if (want === cur) return;
 
+
       // don't cut a running reaction off mid-gesture unless something with a
       // strictly higher priority asks for the stage
-      if (now < lockUntil.current && PRIORITY[want] <= PRIORITY[cur]) return;
+      // "hide" (eyes covered) must be instant — privacy beats gesture continuity
+      if (now < lockUntil.current && want !== "hide" && PRIORITY[want] <= PRIORITY[cur]) return;
 
-      // never show a clip that is not fully buffered — prevents the hitch
-      if (!ready[want] && want !== "idle") return;
+      // never show a clip that has no frames yet — read the element directly so
+      // a missed `canplaythrough` event can never strand a reaction
+      const wantEl = videoRefs.current[want];
+      if (want !== "idle" && !ready[want] && (wantEl?.readyState ?? 0) < 2) return;
+
 
       activeRef.current = want;
       setActive(want);
@@ -106,7 +114,7 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
     };
 
     resolve();
-    const id = window.setInterval(resolve, 120);
+    const id = window.setInterval(resolve, 50);
     return () => window.clearInterval(id);
   }, [state, ready]);
 
