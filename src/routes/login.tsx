@@ -636,7 +636,7 @@ function CenterPanel(props: {
         </div>
 
         {/* Form */}
-        <form onSubmit={onSubmit} className="mt-5 space-y-3 px-7 pb-2">
+        <form onSubmit={onSubmit} className="mt-3.5 space-y-2.5 px-6 pb-1">
           {method === "qr" ? (
             <QRPanel onAuthenticated={onQrAuthenticated} />
           ) : method === "sso" ? (
