@@ -51,7 +51,7 @@ export function OwlStage({ state = "idle" }: { state?: OwlState }) {
   const [ready, setReady] = useState<Partial<Record<ClipKey, boolean>>>({});
   const [active, setActive] = useState<ClipKey>("idle");
   const activeRef = useRef<ClipKey>("idle");
-  const greetDone = useRef(true);
+  const greetDone = useRef(false);
   const lockUntil = useRef(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
