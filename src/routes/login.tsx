@@ -6,9 +6,11 @@ import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
   Lock, Globe, Mic, MicOff, Building2,
   Radio, Wifi, Server,
-  CheckCircle2, AlertTriangle, Languages, ArrowRight, Crown, RefreshCcw,
+  CheckCircle2, AlertTriangle, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand/BrandLogo";
+import { LanguageSelect } from "@/components/i18n/LanguageSelect";
+import { findLanguage } from "@/lib/languages";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import {
@@ -104,7 +106,14 @@ function NexusLogin() {
   const [submitting, setSubmitting] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [voice, setVoice] = useState(false);
-  const [lang, setLang] = useState("EN");
+  const [lang, setLang] = useState("en");
+
+  // reflect the chosen locale on the document so direction + fonts follow
+  useEffect(() => {
+    const l = findLanguage(lang);
+    document.documentElement.lang = l.code;
+    document.documentElement.dir = l.rtl ? "rtl" : "ltr";
+  }, [lang]);
   const [clock, setClock] = useState(() => new Date());
   const [otpSent, setOtpSent] = useState(false);
   const [ssoDomain, setSsoDomain] = useState("");
@@ -275,12 +284,8 @@ function NexusLogin() {
           </span>
         </div>
         <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
-          <button
-            onClick={() => setLang((l) => (l === "EN" ? "हिं" : l === "हिं" ? "العربية" : "EN"))}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md transition-all hover:bg-white/[0.12] hover:ring-white/20"
-          >
-            <Languages className="size-3" /> {lang}
-          </button>
+          <LanguageSelect value={lang} onChange={setLang} />
+
           <span className="hidden sm:inline tabular-nums text-white/50">
             {clock.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
           </span>
