@@ -9,6 +9,8 @@ import {
   CheckCircle2, AlertTriangle, Languages, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand/BrandLogo";
+import { LanguageSelect } from "@/components/i18n/LanguageSelect";
+import { findLanguage } from "@/lib/languages";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import {
@@ -104,7 +106,7 @@ function NexusLogin() {
   const [submitting, setSubmitting] = useState(false);
   const [attempts, setAttempts] = useState(0);
   const [voice, setVoice] = useState(false);
-  const [lang, setLang] = useState("EN");
+  const [lang, setLang] = useState("en");
   const [clock, setClock] = useState(() => new Date());
   const [otpSent, setOtpSent] = useState(false);
   const [ssoDomain, setSsoDomain] = useState("");
