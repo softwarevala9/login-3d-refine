@@ -275,12 +275,8 @@ function NexusLogin() {
           </span>
         </div>
         <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
-          <button
-            onClick={() => setLang((l) => (l === "EN" ? "हिं" : l === "हिं" ? "العربية" : "EN"))}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md transition-all hover:bg-white/[0.12] hover:ring-white/20"
-          >
-            <Languages className="size-3" /> {lang}
-          </button>
+          <LanguageSelect value={lang} onChange={setLang} />
+
           <span className="hidden sm:inline tabular-nums text-white/50">
             {clock.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
           </span>
