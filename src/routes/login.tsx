@@ -6,7 +6,7 @@ import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
   Lock, Globe, Mic, MicOff, Building2,
   Radio, Wifi, Server,
-  CheckCircle2, AlertTriangle, Languages, ArrowRight, Crown, RefreshCcw,
+  CheckCircle2, AlertTriangle, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
 import { BrandLogo } from "@/components/brand/BrandLogo";
 import { LanguageSelect } from "@/components/i18n/LanguageSelect";
@@ -107,6 +107,13 @@ function NexusLogin() {
   const [attempts, setAttempts] = useState(0);
   const [voice, setVoice] = useState(false);
   const [lang, setLang] = useState("en");
+
+  // reflect the chosen locale on the document so direction + fonts follow
+  useEffect(() => {
+    const l = findLanguage(lang);
+    document.documentElement.lang = l.code;
+    document.documentElement.dir = l.rtl ? "rtl" : "ltr";
+  }, [lang]);
   const [clock, setClock] = useState(() => new Date());
   const [otpSent, setOtpSent] = useState(false);
   const [ssoDomain, setSsoDomain] = useState("");
