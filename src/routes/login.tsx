@@ -264,25 +264,8 @@ function NexusLogin() {
       <CursorSpotlight />
 
 
-      {/* Top strip — security telemetry */}
-      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-between gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
-        <div className="flex min-w-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-white/60">
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <span className="relative size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/80">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
-            </span>
-            Nexus OS · Operational
-          </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <Server className="size-3" /> 42 regions
-          </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <ShieldCheck className="size-3" /> 2FA active
-          </span>
-          <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <Wifi className="size-3" /> Trusted device
-          </span>
-        </div>
+      {/* Top strip — language + clock only */}
+      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-end gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
         <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
           <LanguageSelect value={lang} onChange={setLang} />
 
@@ -460,22 +443,25 @@ function NexusBackground() {
 
 const SLIDES = [
   {
-    tag: "Nexus OS",
+    tag: "Platform",
+    art: "os" as const,
     title: "One operating system for the whole company",
     body: "Projects, people, payroll, support and delivery — a single signed-in surface.",
-    grad: "linear-gradient(135deg, oklch(0.55 0.19 330), oklch(0.48 0.16 300))",
+    grad: "linear-gradient(160deg, oklch(0.34 0.13 268), oklch(0.20 0.08 272) 60%, oklch(0.14 0.04 268))",
   },
   {
     tag: "Security",
+    art: "shield" as const,
     title: "Passwordless, licensed or QR — your choice",
     body: "Every method is backed by real sessions, real roles and per-device approval.",
-    grad: "linear-gradient(135deg, oklch(0.52 0.14 190), oklch(0.45 0.15 250))",
+    grad: "linear-gradient(160deg, oklch(0.32 0.11 225), oklch(0.19 0.07 250) 60%, oklch(0.13 0.04 258))",
   },
   {
     tag: "Scale",
+    art: "globe" as const,
     title: "42 regions · 1,000,000+ operators",
     body: "Built for global teams working around the clock without a single hand-off gap.",
-    grad: "linear-gradient(135deg, oklch(0.60 0.16 75), oklch(0.50 0.17 40))",
+    grad: "linear-gradient(160deg, oklch(0.33 0.12 200), oklch(0.20 0.08 235) 60%, oklch(0.13 0.04 250))",
   },
 ];
 
@@ -497,25 +483,30 @@ function ShowcaseSlider() {
               background: s.grad,
               opacity: idx === i ? 1 : 0,
               transform: `translateX(${(idx - i) * 12}px) scale(${idx === i ? 1 : 1.04})`,
+              pointerEvents: idx === i ? "auto" : "none",
             }}
           >
-            <span className="w-fit rounded-full bg-black/25 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-white/85 ring-1 ring-white/20">
+            {/* 3D illustration fills the empty upper area of the slide */}
+            <div className="pointer-events-none absolute inset-x-0 top-8 bottom-[92px]">
+              <SlideArt3D kind={s.art} />
+            </div>
+            <span className="w-fit rounded-full bg-black/35 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-sky-100 shadow-[0_0_10px_oklch(0.7_0.18_250/0.45)] ring-1 ring-sky-300/40">
               {s.tag}
             </span>
-            <p className="mt-2 text-[15px] font-semibold leading-snug text-white">{s.title}</p>
+            <p className="mt-2 text-[15px] font-semibold leading-snug text-white [text-shadow:0_2px_12px_oklch(0_0_0/0.8)]">{s.title}</p>
             <p className="mt-1 text-[11.5px] leading-relaxed text-white/80">{s.body}</p>
           </div>
         ))}
-        <div className="absolute inset-x-4 top-4 flex gap-1.5">
+        <div className="absolute inset-x-4 top-4 z-10 flex gap-1.5">
           {SLIDES.map((s, idx) => (
             <button
               key={s.tag}
               aria-label={`Show slide ${idx + 1}`}
               onClick={() => setI(idx)}
-              className="h-1 flex-1 overflow-hidden rounded-full bg-white/25"
+              className="h-1 flex-1 overflow-hidden rounded-full bg-white/20 ring-1 ring-sky-300/20"
             >
               <span
-                className="block h-full rounded-full bg-white transition-all duration-700"
+                className="block h-full rounded-full bg-sky-200 shadow-[0_0_8px_oklch(0.8_0.15_240)] transition-all duration-700"
                 style={{ width: idx === i ? "100%" : "0%" }}
               />
             </button>
@@ -593,10 +584,12 @@ function CenterPanel(props: {
         <div className="relative px-6 pt-5">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <BrandLogo variant="round" size={46} />
+              <BrandLogo variant="round" size={52} />
               <div className="flex flex-col">
-                <BrandLogo variant="long" size={28} />
-                <span className="mt-1 text-[9.5px] uppercase tracking-[0.22em] text-white/45">Nexus OS · v4.2</span>
+                <span className="text-[17px] font-semibold tracking-tight text-white [text-shadow:0_2px_14px_oklch(0_0_0/0.7)]">
+                  Software&nbsp;Vala
+                </span>
+                <span className="mt-0.5 text-[9.5px] uppercase tracking-[0.22em] text-white/45">The name of trust</span>
               </div>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400/15 to-amber-300/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-amber-200 shadow-[inset_0_1px_0_oklch(1_0_0/0.15)] ring-1 ring-amber-300/30 backdrop-blur-md">
