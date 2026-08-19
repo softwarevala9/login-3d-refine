@@ -576,10 +576,12 @@ function CenterPanel(props: {
         <div className="relative px-6 pt-5">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
-              <BrandLogo variant="round" size={46} />
+              <BrandLogo variant="round" size={52} />
               <div className="flex flex-col">
-                <BrandLogo variant="long" size={28} />
-                <span className="mt-1 text-[9.5px] uppercase tracking-[0.22em] text-white/45">Nexus OS · v4.2</span>
+                <span className="text-[17px] font-semibold tracking-tight text-white [text-shadow:0_2px_14px_oklch(0_0_0/0.7)]">
+                  Software&nbsp;Vala
+                </span>
+                <span className="mt-0.5 text-[9.5px] uppercase tracking-[0.22em] text-white/45">The name of trust</span>
               </div>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-400/15 to-amber-300/10 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-amber-200 shadow-[inset_0_1px_0_oklch(1_0_0/0.15)] ring-1 ring-amber-300/30 backdrop-blur-md">
