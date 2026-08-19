@@ -147,7 +147,7 @@ export function IconOrb3D({
   size?: number;
   className?: string;
 }) {
-  const [a, b] = ORB_HUES[hue] ?? ORB_HUES.blue!;
+  const [a, b] = ORB_HUES[hue] ?? ORB_HUES["blue"]!;
   return (
     <span
       className={`relative inline-grid shrink-0 place-items-center ${className}`}
