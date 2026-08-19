@@ -483,25 +483,30 @@ function ShowcaseSlider() {
               background: s.grad,
               opacity: idx === i ? 1 : 0,
               transform: `translateX(${(idx - i) * 12}px) scale(${idx === i ? 1 : 1.04})`,
+              pointerEvents: idx === i ? "auto" : "none",
             }}
           >
-            <span className="w-fit rounded-full bg-black/25 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-white/85 ring-1 ring-white/20">
+            {/* 3D illustration fills the empty upper area of the slide */}
+            <div className="pointer-events-none absolute inset-x-0 top-8 bottom-[92px]">
+              <SlideArt3D kind={s.art} />
+            </div>
+            <span className="w-fit rounded-full bg-black/35 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-sky-100 shadow-[0_0_10px_oklch(0.7_0.18_250/0.45)] ring-1 ring-sky-300/40">
               {s.tag}
             </span>
-            <p className="mt-2 text-[15px] font-semibold leading-snug text-white">{s.title}</p>
+            <p className="mt-2 text-[15px] font-semibold leading-snug text-white [text-shadow:0_2px_12px_oklch(0_0_0/0.8)]">{s.title}</p>
             <p className="mt-1 text-[11.5px] leading-relaxed text-white/80">{s.body}</p>
           </div>
         ))}
-        <div className="absolute inset-x-4 top-4 flex gap-1.5">
+        <div className="absolute inset-x-4 top-4 z-10 flex gap-1.5">
           {SLIDES.map((s, idx) => (
             <button
               key={s.tag}
               aria-label={`Show slide ${idx + 1}`}
               onClick={() => setI(idx)}
-              className="h-1 flex-1 overflow-hidden rounded-full bg-white/25"
+              className="h-1 flex-1 overflow-hidden rounded-full bg-white/20 ring-1 ring-sky-300/20"
             >
               <span
-                className="block h-full rounded-full bg-white transition-all duration-700"
+                className="block h-full rounded-full bg-sky-200 shadow-[0_0_8px_oklch(0.8_0.15_240)] transition-all duration-700"
                 style={{ width: idx === i ? "100%" : "0%" }}
               />
             </button>
