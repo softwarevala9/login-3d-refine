@@ -264,25 +264,8 @@ function NexusLogin() {
       <CursorSpotlight />
 
 
-      {/* Top strip — security telemetry */}
-      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-between gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
-        <div className="flex min-w-0 items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-white/60">
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <span className="relative size-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px] shadow-emerald-400/80">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400/60" />
-            </span>
-            Nexus OS · Operational
-          </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <Server className="size-3" /> 42 regions
-          </span>
-          <span className="hidden md:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <ShieldCheck className="size-3" /> 2FA active
-          </span>
-          <span className="hidden xl:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2.5 py-1 shadow-[inset_0_1px_0_oklch(1_0_0/0.12)] ring-1 ring-white/10 backdrop-blur-md">
-            <Wifi className="size-3" /> Trusted device
-          </span>
-        </div>
+      {/* Top strip — language + clock only */}
+      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-end gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
         <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
           <LanguageSelect value={lang} onChange={setLang} />
 
