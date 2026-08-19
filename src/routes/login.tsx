@@ -443,22 +443,25 @@ function NexusBackground() {
 
 const SLIDES = [
   {
-    tag: "Nexus OS",
+    tag: "Platform",
+    art: "os" as const,
     title: "One operating system for the whole company",
     body: "Projects, people, payroll, support and delivery — a single signed-in surface.",
-    grad: "linear-gradient(135deg, oklch(0.55 0.19 330), oklch(0.48 0.16 300))",
+    grad: "linear-gradient(160deg, oklch(0.34 0.13 268), oklch(0.20 0.08 272) 60%, oklch(0.14 0.04 268))",
   },
   {
     tag: "Security",
+    art: "shield" as const,
     title: "Passwordless, licensed or QR — your choice",
     body: "Every method is backed by real sessions, real roles and per-device approval.",
-    grad: "linear-gradient(135deg, oklch(0.52 0.14 190), oklch(0.45 0.15 250))",
+    grad: "linear-gradient(160deg, oklch(0.32 0.11 225), oklch(0.19 0.07 250) 60%, oklch(0.13 0.04 258))",
   },
   {
     tag: "Scale",
+    art: "globe" as const,
     title: "42 regions · 1,000,000+ operators",
     body: "Built for global teams working around the clock without a single hand-off gap.",
-    grad: "linear-gradient(135deg, oklch(0.60 0.16 75), oklch(0.50 0.17 40))",
+    grad: "linear-gradient(160deg, oklch(0.33 0.12 200), oklch(0.20 0.08 235) 60%, oklch(0.13 0.04 250))",
   },
 ];
 
