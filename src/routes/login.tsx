@@ -287,7 +287,7 @@ function NexusLogin() {
           />
         </div>
         <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_340ms_cubic-bezier(.2,.7,.2,1)_both]">
-          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} />
+          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} lang={lang} />
         </div>
       </div>
 
@@ -987,11 +987,12 @@ function SSOPanel({ value, onChange, submitting }: { value: string; onChange: (s
 
 /* ============================ Right Panel (AI) ============================ */
 
-function RightPanel({ ai, stage, voice, setVoice }: {
+function RightPanel({ ai, stage, voice, setVoice, lang }: {
   ai: { mood: string; line: string; tone: string };
   stage: AIState;
   voice: boolean;
   setVoice: (b: boolean) => void;
+  lang: string;
 }) {
   // Speak the current AI line aloud when voice is on — human-like concierge.
   useEffect(() => {
@@ -1004,7 +1005,9 @@ function RightPanel({ ai, stage, voice, setVoice }: {
       u.pitch = 1.05;
       u.volume = 0.9;
       const voices = window.speechSynthesis.getVoices();
+      u.lang = lang;
       const preferred =
+        voices.find((v) => v.lang.toLowerCase().startsWith(lang.toLowerCase())) ||
         voices.find((v) => /female|zira|samantha|google uk english female/i.test(v.name)) ||
         voices.find((v) => /en-/i.test(v.lang));
       if (preferred) u.voice = preferred;
@@ -1015,7 +1018,7 @@ function RightPanel({ ai, stage, voice, setVoice }: {
     return () => {
       try { window.speechSynthesis.cancel(); } catch { /* noop */ }
     };
-  }, [ai.line, voice]);
+  }, [ai.line, voice, lang]);
 
   return (
     <aside className="flex min-h-0 flex-col justify-center lg:h-full">
