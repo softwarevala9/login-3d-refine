@@ -583,6 +583,26 @@ function CenterPanel(props: {
         <div className="relative flex flex-col lg:min-h-0 lg:flex-1 lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Brand header — hero logo treatment */}
         <div className="relative px-6 pt-5">
+          {/* Language + speak controls */}
+          <div className="mb-3 flex items-center justify-end gap-2">
+            <LanguageSelect value={lang} onChange={setLang} />
+            <button
+              type="button"
+              aria-pressed={voice}
+              aria-label={voice ? "Turn voice off" : "Turn voice on"}
+              onClick={() => setVoice(!voice)}
+              className={[
+                "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium transition-all duration-300 active:translate-y-[1px] active:scale-[0.98]",
+                voice
+                  ? "text-white ring-1 ring-sky-200/60 shadow-[0_0_0_1px_oklch(0.82_0.16_245/0.6),0_0_16px_oklch(0.72_0.20_250/0.5),inset_0_1px_0_oklch(1_0_0/0.35),inset_0_-3px_7px_oklch(0_0_0/0.4)]"
+                  : "bg-gradient-to-b from-white/[0.09] to-white/[0.02] text-white/75 ring-1 ring-sky-300/20 shadow-[inset_0_1px_0_oklch(1_0_0/0.18),inset_0_-3px_7px_oklch(0_0_0/0.45)] hover:-translate-y-px hover:text-white hover:ring-sky-200/50 hover:shadow-[0_0_16px_oklch(0.72_0.20_250/0.4)]",
+              ].join(" ")}
+              style={voice ? { background: "linear-gradient(135deg, oklch(0.55 0.20 335), oklch(0.62 0.16 60))" } : undefined}
+            >
+              {voice ? <Volume2 className="size-3" /> : <VolumeX className="size-3" />}
+              {voice ? "Speaking" : "Speak"}
+            </button>
+          </div>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <BrandLogo variant="round" size={52} />
@@ -597,6 +617,7 @@ function CenterPanel(props: {
               <Crown className="size-3 text-amber-300" /> Founder
             </span>
           </div>
+
           <div className="mt-4">
             <h1 className="text-[clamp(20px,2.2vh+10px,26px)] font-semibold leading-[1.1] tracking-tight text-white [text-shadow:0_2px_18px_oklch(0_0_0/0.6)]">
               Welcome back,{" "}
