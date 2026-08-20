@@ -620,15 +620,16 @@ function CenterPanel(props: {
                   type="button"
                   onClick={() => setMethod(m.id)}
                   className={[
-                    "relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all duration-300",
+                    "relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all duration-300 active:translate-y-[1px] active:scale-[0.98]",
                     active
-                      ? "text-white shadow-[0_10px_30px_-10px_oklch(0.6_0.22_285/0.8)] ring-1 ring-white/20"
-                      : "bg-white/[0.04] text-white/70 ring-1 ring-white/10 hover:bg-white/[0.08] hover:text-white/90",
+                      ? "text-white ring-1 ring-sky-200/50 shadow-[0_0_0_1px_oklch(0.82_0.16_245/0.6),0_0_16px_oklch(0.72_0.20_250/0.45),0_12px_28px_-10px_oklch(0.6_0.22_285/0.85),inset_0_1px_0_oklch(1_0_0/0.35),inset_0_-3px_7px_oklch(0_0_0/0.4)]"
+                      : "bg-gradient-to-b from-white/[0.09] to-white/[0.02] text-white/72 ring-1 ring-sky-300/20 shadow-[inset_0_1px_0_oklch(1_0_0/0.18),inset_0_-3px_7px_oklch(0_0_0/0.45),0_0_8px_oklch(0.72_0.20_250/0.14)] hover:-translate-y-px hover:text-white hover:ring-sky-200/50 hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.25),0_0_16px_oklch(0.72_0.20_250/0.4)]",
                   ].join(" ")}
                   style={active ? { background: "linear-gradient(135deg, oklch(0.55 0.20 335), oklch(0.62 0.16 60))" } : undefined}
                 >
-                  <m.icon className="size-3.5" /> {m.label}
+                  <m.icon className="size-3.5 [filter:drop-shadow(0_1px_2px_oklch(0_0_0/0.6))]" /> {m.label}
                 </button>
+
               );
             })}
           </div>
