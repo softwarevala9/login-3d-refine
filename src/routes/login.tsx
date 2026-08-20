@@ -743,8 +743,9 @@ function CenterPanel(props: {
               <button
                 type="submit"
                 disabled={submitting}
-                className="group relative mt-2 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl px-4 py-3.5 text-[14px] font-semibold text-white shadow-[0_20px_50px_-16px_oklch(0.55_0.22_280/0.8),inset_0_1px_0_oklch(1_0_0/0.22)] transition-all duration-300 hover:translate-y-[-1px] hover:shadow-[0_28px_60px_-18px_oklch(0.6_0.22_280/0.9),inset_0_1px_0_oklch(1_0_0/0.3)] active:translate-y-0 disabled:opacity-70"
+                className="group relative mt-2 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl px-4 py-3.5 text-[14px] font-semibold text-white ring-1 ring-sky-300/40 shadow-[0_0_0_1px_oklch(0.80_0.17_245/0.45),0_0_18px_oklch(0.72_0.20_250/0.35),0_22px_50px_-16px_oklch(0.55_0.22_280/0.85),inset_0_1px_0_oklch(1_0_0/0.32),inset_0_-4px_10px_oklch(0_0_0/0.45)] transition-all duration-300 hover:-translate-y-[1.5px] hover:ring-sky-200/70 hover:shadow-[0_0_0_1px_oklch(0.84_0.16_245/0.8),0_0_26px_oklch(0.74_0.20_250/0.6),0_30px_62px_-18px_oklch(0.6_0.22_280/0.95),inset_0_1px_0_oklch(1_0_0/0.38),inset_0_-4px_10px_oklch(0_0_0/0.5)] active:translate-y-[1px] active:scale-[0.99] disabled:opacity-70"
                 style={{ background: "linear-gradient(135deg, oklch(0.58 0.21 335), oklch(0.66 0.17 55))" }}
+
               >
                 {/* hover gradient swap */}
                 <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
