@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
-  Lock, Globe, Mic, MicOff, Building2,
+  Lock, Globe, Mic, MicOff, Building2, Volume2, VolumeX,
   Radio, Wifi, Server,
   CheckCircle2, AlertTriangle, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
@@ -115,18 +115,12 @@ function NexusLogin() {
     document.documentElement.lang = l.code;
     document.documentElement.dir = l.rtl ? "rtl" : "ltr";
   }, [lang]);
-  const [clock, setClock] = useState(() => new Date());
   const [otpSent, setOtpSent] = useState(false);
   const [ssoDomain, setSsoDomain] = useState("");
 
   useEffect(() => {
     const t = setTimeout(() => setStage("idle"), 2600);
     return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    const t = setInterval(() => setClock(new Date()), 1000);
-    return () => clearInterval(t);
   }, []);
 
   // Reset per-method transient state when switching methods.
@@ -265,16 +259,6 @@ function NexusLogin() {
       <CursorSpotlight />
 
 
-      {/* Top strip — language + clock only */}
-      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-end gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
-        <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
-          <LanguageSelect value={lang} onChange={setLang} />
-
-          <span className="hidden sm:inline tabular-nums text-white/50">
-            {clock.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
-          </span>
-        </div>
-      </div>
 
       {/* Main grid — one cohesive surface, never taller than the viewport */}
       <div className="relative z-10 mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-3 px-4 py-3 lg:min-h-0 lg:flex-1 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
@@ -297,11 +281,13 @@ function NexusLogin() {
             otpSent={otpSent}
             ssoDomain={ssoDomain} setSsoDomain={setSsoDomain}
             onQrAuthenticated={finishAuth}
+            lang={lang} setLang={setLang}
+            voice={voice} setVoice={setVoice}
             stage={stage}
           />
         </div>
         <div className="min-h-0 lg:h-full [animation:nx-fade-up_900ms_340ms_cubic-bezier(.2,.7,.2,1)_both]">
-          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} />
+          <RightPanel ai={ai} stage={stage} voice={voice} setVoice={setVoice} lang={lang} />
         </div>
       </div>
 
@@ -488,7 +474,7 @@ function ShowcaseSlider() {
             }}
           >
             {/* 3D illustration fills the empty upper area of the slide */}
-            <div className="pointer-events-none absolute inset-x-0 top-8 bottom-[92px]">
+            <div className="pointer-events-none absolute inset-0 grid place-items-center pb-[84px] pt-8">
               <SlideArt3D kind={s.art} />
             </div>
             <span className="w-fit rounded-full bg-black/35 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-sky-100 shadow-[0_0_10px_oklch(0.7_0.18_250/0.45)] ring-1 ring-sky-300/40">
@@ -563,12 +549,15 @@ function CenterPanel(props: {
   ssoDomain: string; setSsoDomain: (s: string) => void;
   onQrAuthenticated: () => void;
   stage: AIState;
+  lang: string; setLang: (s: string) => void;
+  voice: boolean; setVoice: (b: boolean) => void;
 }) {
   const {
     method, setMethod, identifier, setIdentifier, password, setPassword,
     showPw, setShowPw, remember, setRemember, submitting, attempts,
     onIdentifierFocus, onPasswordFocus, onBlur, onSubmit, onOAuth, stage,
     otpSent, ssoDomain, setSsoDomain, onQrAuthenticated,
+    lang, setLang, voice, setVoice,
   } = props;
 
   const methodMeta = METHODS.find((m) => m.id === method)!;
@@ -583,6 +572,26 @@ function CenterPanel(props: {
         <div className="relative flex flex-col lg:min-h-0 lg:flex-1 lg:overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {/* Brand header — hero logo treatment */}
         <div className="relative px-6 pt-5">
+          {/* Language + speak controls */}
+          <div className="mb-3 flex items-center justify-end gap-2">
+            <LanguageSelect value={lang} onChange={setLang} />
+            <button
+              type="button"
+              aria-pressed={voice}
+              aria-label={voice ? "Turn voice off" : "Turn voice on"}
+              onClick={() => setVoice(!voice)}
+              className={[
+                "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium transition-all duration-300 active:translate-y-[1px] active:scale-[0.98]",
+                voice
+                  ? "text-white ring-1 ring-sky-200/60 shadow-[0_0_0_1px_oklch(0.82_0.16_245/0.6),0_0_16px_oklch(0.72_0.20_250/0.5),inset_0_1px_0_oklch(1_0_0/0.35),inset_0_-3px_7px_oklch(0_0_0/0.4)]"
+                  : "bg-gradient-to-b from-white/[0.09] to-white/[0.02] text-white/75 ring-1 ring-sky-300/20 shadow-[inset_0_1px_0_oklch(1_0_0/0.18),inset_0_-3px_7px_oklch(0_0_0/0.45)] hover:-translate-y-px hover:text-white hover:ring-sky-200/50 hover:shadow-[0_0_16px_oklch(0.72_0.20_250/0.4)]",
+              ].join(" ")}
+              style={voice ? { background: "linear-gradient(135deg, oklch(0.55 0.20 335), oklch(0.62 0.16 60))" } : undefined}
+            >
+              {voice ? <Volume2 className="size-3" /> : <VolumeX className="size-3" />}
+              {voice ? "Speaking" : "Speak"}
+            </button>
+          </div>
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3">
               <BrandLogo variant="round" size={52} />
@@ -597,6 +606,7 @@ function CenterPanel(props: {
               <Crown className="size-3 text-amber-300" /> Founder
             </span>
           </div>
+
           <div className="mt-4">
             <h1 className="text-[clamp(20px,2.2vh+10px,26px)] font-semibold leading-[1.1] tracking-tight text-white [text-shadow:0_2px_18px_oklch(0_0_0/0.6)]">
               Welcome back,{" "}
@@ -620,15 +630,16 @@ function CenterPanel(props: {
                   type="button"
                   onClick={() => setMethod(m.id)}
                   className={[
-                    "relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all duration-300",
+                    "relative inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium transition-all duration-300 active:translate-y-[1px] active:scale-[0.98]",
                     active
-                      ? "text-white shadow-[0_10px_30px_-10px_oklch(0.6_0.22_285/0.8)] ring-1 ring-white/20"
-                      : "bg-white/[0.04] text-white/70 ring-1 ring-white/10 hover:bg-white/[0.08] hover:text-white/90",
+                      ? "text-white ring-1 ring-sky-200/50 shadow-[0_0_0_1px_oklch(0.82_0.16_245/0.6),0_0_16px_oklch(0.72_0.20_250/0.45),0_12px_28px_-10px_oklch(0.6_0.22_285/0.85),inset_0_1px_0_oklch(1_0_0/0.35),inset_0_-3px_7px_oklch(0_0_0/0.4)]"
+                      : "bg-gradient-to-b from-white/[0.09] to-white/[0.02] text-white/72 ring-1 ring-sky-300/20 shadow-[inset_0_1px_0_oklch(1_0_0/0.18),inset_0_-3px_7px_oklch(0_0_0/0.45),0_0_8px_oklch(0.72_0.20_250/0.14)] hover:-translate-y-px hover:text-white hover:ring-sky-200/50 hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.25),0_0_16px_oklch(0.72_0.20_250/0.4)]",
                   ].join(" ")}
                   style={active ? { background: "linear-gradient(135deg, oklch(0.55 0.20 335), oklch(0.62 0.16 60))" } : undefined}
                 >
-                  <m.icon className="size-3.5" /> {m.label}
+                  <m.icon className="size-3.5 [filter:drop-shadow(0_1px_2px_oklch(0_0_0/0.6))]" /> {m.label}
                 </button>
+
               );
             })}
           </div>
@@ -743,8 +754,9 @@ function CenterPanel(props: {
               <button
                 type="submit"
                 disabled={submitting}
-                className="group relative mt-2 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl px-4 py-3.5 text-[14px] font-semibold text-white shadow-[0_20px_50px_-16px_oklch(0.55_0.22_280/0.8),inset_0_1px_0_oklch(1_0_0/0.22)] transition-all duration-300 hover:translate-y-[-1px] hover:shadow-[0_28px_60px_-18px_oklch(0.6_0.22_280/0.9),inset_0_1px_0_oklch(1_0_0/0.3)] active:translate-y-0 disabled:opacity-70"
+                className="group relative mt-2 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl px-4 py-3.5 text-[14px] font-semibold text-white ring-1 ring-sky-300/40 shadow-[0_0_0_1px_oklch(0.80_0.17_245/0.45),0_0_18px_oklch(0.72_0.20_250/0.35),0_22px_50px_-16px_oklch(0.55_0.22_280/0.85),inset_0_1px_0_oklch(1_0_0/0.32),inset_0_-4px_10px_oklch(0_0_0/0.45)] transition-all duration-300 hover:-translate-y-[1.5px] hover:ring-sky-200/70 hover:shadow-[0_0_0_1px_oklch(0.84_0.16_245/0.8),0_0_26px_oklch(0.74_0.20_250/0.6),0_30px_62px_-18px_oklch(0.6_0.22_280/0.95),inset_0_1px_0_oklch(1_0_0/0.38),inset_0_-4px_10px_oklch(0_0_0/0.5)] active:translate-y-[1px] active:scale-[0.99] disabled:opacity-70"
                 style={{ background: "linear-gradient(135deg, oklch(0.58 0.21 335), oklch(0.66 0.17 55))" }}
+
               >
                 {/* hover gradient swap */}
                 <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -794,10 +806,11 @@ function CenterPanel(props: {
             <button key={p.label} type="button"
               onClick={() => (p.provider ? onOAuth(p.provider) : setMethod("sso"))}
               disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2 text-[12px] font-medium text-white/80 shadow-[inset_0_1px_0_oklch(1_0_0/0.10),0_12px_24px_-18px_oklch(0_0_0/0.9)] ring-1 ring-white/10 transition-all hover:-translate-y-px hover:bg-white/[0.08] active:translate-y-0 disabled:opacity-50">
-              <span className="grid size-5 place-items-center rounded-md bg-white/10 text-[11px] font-bold">{p.letter || "⌥"}</span>
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-white/[0.10] to-white/[0.02] px-3 py-2 text-[12px] font-medium text-white/85 ring-1 ring-sky-300/25 shadow-[inset_0_1px_0_oklch(1_0_0/0.22),inset_0_-3px_8px_oklch(0_0_0/0.5),0_0_10px_oklch(0.72_0.20_250/0.18),0_14px_26px_-18px_oklch(0_0_0/0.95)] transition-all duration-300 hover:-translate-y-[1.5px] hover:ring-sky-200/60 hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.3),inset_0_-3px_8px_oklch(0_0_0/0.5),0_0_18px_oklch(0.74_0.20_250/0.45),0_18px_32px_-18px_oklch(0_0_0/0.95)] active:translate-y-[1px] active:scale-[0.985] disabled:opacity-50">
+              <span className="grid size-5 place-items-center rounded-md bg-gradient-to-b from-white/25 to-white/5 text-[11px] font-bold shadow-[inset_0_1px_0_oklch(1_0_0/0.45),0_0_8px_oklch(0.72_0.20_250/0.35)]">{p.letter || "⌥"}</span>
               {p.label}
             </button>
+
           ))}
         </div>
 
@@ -974,11 +987,12 @@ function SSOPanel({ value, onChange, submitting }: { value: string; onChange: (s
 
 /* ============================ Right Panel (AI) ============================ */
 
-function RightPanel({ ai, stage, voice, setVoice }: {
+function RightPanel({ ai, stage, voice, setVoice, lang }: {
   ai: { mood: string; line: string; tone: string };
   stage: AIState;
   voice: boolean;
   setVoice: (b: boolean) => void;
+  lang: string;
 }) {
   // Speak the current AI line aloud when voice is on — human-like concierge.
   useEffect(() => {
@@ -991,7 +1005,9 @@ function RightPanel({ ai, stage, voice, setVoice }: {
       u.pitch = 1.05;
       u.volume = 0.9;
       const voices = window.speechSynthesis.getVoices();
+      u.lang = lang;
       const preferred =
+        voices.find((v) => v.lang.toLowerCase().startsWith(lang.toLowerCase())) ||
         voices.find((v) => /female|zira|samantha|google uk english female/i.test(v.name)) ||
         voices.find((v) => /en-/i.test(v.lang));
       if (preferred) u.voice = preferred;
@@ -1002,7 +1018,7 @@ function RightPanel({ ai, stage, voice, setVoice }: {
     return () => {
       try { window.speechSynthesis.cancel(); } catch { /* noop */ }
     };
-  }, [ai.line, voice]);
+  }, [ai.line, voice, lang]);
 
   return (
     <aside className="flex min-h-0 flex-col justify-center lg:h-full">

@@ -183,39 +183,76 @@ export function IconOrb3D({
 export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
   if (kind === "shield") {
     return (
-      <div className="pointer-events-none relative size-full [perspective:900px]">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [animation:art-float_7s_ease-in-out_infinite] [transform-style:preserve-3d]">
-          <svg width="150" height="150" viewBox="0 0 100 100">
-            <defs>
-              <linearGradient id="shd" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="oklch(0.88 0.14 220)" />
-                <stop offset="55%" stopColor="oklch(0.58 0.18 258)" />
-                <stop offset="100%" stopColor="oklch(0.34 0.14 270)" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M50 6 L86 20 V50 C86 72 68 88 50 94 C32 88 14 72 14 50 V20 Z"
-              fill="url(#shd)"
-              stroke="oklch(0.90 0.13 225)"
-              strokeWidth="1.6"
-              style={{ filter: "drop-shadow(0 12px 22px oklch(0 0 0 / 0.6))" }}
-            />
-            <path d="M50 6 L86 20 V50 C86 62 80 72 72 80 L50 52 Z" fill="oklch(1 0 0 / 0.13)" />
-            <path
-              d="M33 50 L45 63 L69 37"
-              fill="none"
-              stroke="#fff"
-              strokeWidth="6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ filter: "drop-shadow(0 0 8px oklch(0.9 0.15 220))" }}
-            />
-          </svg>
+      <div className="pointer-events-none grid size-full place-items-center [perspective:1000px]">
+        <div className="relative grid size-[168px] place-items-center [animation:art-float_7s_ease-in-out_infinite] [transform-style:preserve-3d]">
+          {/* soft colour-shifting halo */}
           <span
             aria-hidden
-            className="absolute inset-0 -z-10 rounded-full blur-2xl [animation:art-pulse_4s_ease-in-out_infinite]"
-            style={{ background: "radial-gradient(circle, oklch(0.75 0.18 250 / 0.7), transparent 70%)" }}
+            className="absolute inset-[-18%] rounded-full blur-2xl [animation:art-pulse_5s_ease-in-out_infinite,art-hue_11s_linear_infinite]"
+            style={{ background: "radial-gradient(circle, oklch(0.72 0.19 250 / 0.65), transparent 70%)" }}
           />
+          <svg
+            width="164"
+            height="164"
+            viewBox="0 0 100 100"
+            className="relative [animation:art-hue_11s_linear_infinite]"
+            style={{ filter: "drop-shadow(0 18px 26px oklch(0 0 0 / 0.65))" }}
+          >
+            <defs>
+              <linearGradient id="shd-body" x1="0.1" y1="0" x2="0.9" y2="1">
+                <stop offset="0%" stopColor="oklch(0.90 0.13 215)" />
+                <stop offset="40%" stopColor="oklch(0.64 0.18 250)" />
+                <stop offset="75%" stopColor="oklch(0.44 0.16 262)" />
+                <stop offset="100%" stopColor="oklch(0.28 0.11 268)" />
+              </linearGradient>
+              <linearGradient id="shd-edge" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stopColor="oklch(0.34 0.12 268)" />
+                <stop offset="100%" stopColor="oklch(0.58 0.16 245)" />
+              </linearGradient>
+              <radialGradient id="shd-spec" cx="0.34" cy="0.22" r="0.55">
+                <stop offset="0%" stopColor="oklch(1 0 0 / 0.65)" />
+                <stop offset="100%" stopColor="oklch(1 0 0 / 0)" />
+              </radialGradient>
+              <clipPath id="shd-clip">
+                <path d="M50 5 L87 19 V50 C87 73 68 89 50 96 C32 89 13 73 13 50 V19 Z" />
+              </clipPath>
+            </defs>
+            {/* extruded side wall */}
+            <path
+              d="M50 8 L90 22 V52 C90 75 71 91 53 98 L50 96 C68 89 87 73 87 50 V19 Z"
+              fill="url(#shd-edge)"
+            />
+            {/* face */}
+            <path
+              d="M50 5 L87 19 V50 C87 73 68 89 50 96 C32 89 13 73 13 50 V19 Z"
+              fill="url(#shd-body)"
+              stroke="oklch(0.92 0.12 225)"
+              strokeWidth="1.4"
+            />
+            <g clipPath="url(#shd-clip)">
+              <path d="M50 5 L87 19 V50 C87 62 82 71 74 80 L50 50 Z" fill="oklch(1 0 0 / 0.12)" />
+              <ellipse cx="36" cy="26" rx="26" ry="18" fill="url(#shd-spec)" />
+              {/* travelling light sweep */}
+              <rect
+                x="-60"
+                y="-10"
+                width="34"
+                height="130"
+                fill="oklch(1 0 0 / 0.22)"
+                transform="rotate(18)"
+                className="[animation:art-sweep_3.6s_ease-in-out_infinite]"
+              />
+            </g>
+            <path
+              d="M33 51 L45 64 L69 37"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="6.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ filter: "drop-shadow(0 0 8px oklch(0.92 0.14 220))" }}
+            />
+          </svg>
         </div>
         <Art3DStyles />
       </div>
@@ -224,46 +261,80 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
 
   if (kind === "globe") {
     return (
-      <div className="pointer-events-none relative size-full">
-        <div className="absolute left-1/2 top-1/2 size-[142px] -translate-x-1/2 -translate-y-1/2 [animation:art-float_8s_ease-in-out_infinite]">
-          <div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle at 32% 28%, oklch(0.92 0.10 210), oklch(0.52 0.17 250) 45%, oklch(0.22 0.10 265) 100%)",
-              boxShadow:
-                "inset -14px -18px 34px oklch(0 0 0 / 0.6), inset 8px 8px 22px oklch(1 0 0 / 0.22), 0 0 0 1px oklch(0.80 0.16 245 / 0.6), 0 0 26px oklch(0.72 0.18 250 / 0.45), 0 22px 34px -18px oklch(0 0 0 / 0.9)",
-            }}
+      <div className="pointer-events-none grid size-full place-items-center [perspective:900px]">
+        <div className="relative grid size-[176px] place-items-center [animation:art-float_8s_ease-in-out_infinite]">
+          <span
+            aria-hidden
+            className="absolute inset-[-14%] rounded-full blur-2xl [animation:art-pulse_6s_ease-in-out_infinite,art-hue_13s_linear_infinite]"
+            style={{ background: "radial-gradient(circle, oklch(0.70 0.18 235 / 0.6), transparent 70%)" }}
           />
-          {/* meridians */}
-          <div className="absolute inset-0 overflow-hidden rounded-full">
-            <div className="absolute inset-0 [animation:art-spin_14s_linear_infinite]">
-              {[18, 38, 58, 78].map((w) => (
+          <div className="relative size-[142px] [animation:art-hue_13s_linear_infinite]">
+            {/* planet body */}
+            <div
+              className="absolute inset-0 overflow-hidden rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle at 30% 26%, oklch(0.95 0.08 205), oklch(0.62 0.16 240) 38%, oklch(0.34 0.13 258) 72%, oklch(0.16 0.07 265) 100%)",
+                boxShadow:
+                  "inset -16px -20px 40px oklch(0 0 0 / 0.7), inset 10px 10px 26px oklch(1 0 0 / 0.25), 0 0 0 1px oklch(0.82 0.15 245 / 0.55), 0 0 30px oklch(0.72 0.18 250 / 0.45), 0 24px 36px -18px oklch(0 0 0 / 0.95)",
+              }}
+            >
+              {/* rotating continents / cloud bands */}
+              <div
+                className="absolute inset-0 opacity-70 [animation:art-drift_16s_linear_infinite]"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(28px 16px at 20% 34%, oklch(0.86 0.14 165 / 0.55), transparent 70%), radial-gradient(34px 18px at 58% 58%, oklch(0.82 0.14 155 / 0.45), transparent 70%), radial-gradient(22px 12px at 82% 30%, oklch(0.88 0.13 170 / 0.4), transparent 70%)",
+                  backgroundSize: "200% 100%",
+                }}
+              />
+              {/* graticule */}
+              <div className="absolute inset-0 [animation:art-spin_18s_linear_infinite]">
+                {[20, 42, 64, 86].map((w) => (
+                  <span
+                    key={w}
+                    className="absolute left-1/2 top-0 h-full -translate-x-1/2 rounded-[50%] border"
+                    style={{ width: `${w}%`, borderColor: "oklch(0.95 0.08 205 / 0.35)" }}
+                  />
+                ))}
+              </div>
+              {[24, 40, 56, 74].map((t) => (
                 <span
-                  key={w}
-                  className="absolute left-1/2 top-0 h-full -translate-x-1/2 rounded-[50%] border"
-                  style={{ width: `${w}%`, borderColor: "oklch(0.92 0.10 210 / 0.45)" }}
+                  key={t}
+                  className="absolute inset-x-0 border-t"
+                  style={{ top: `${t}%`, borderColor: "oklch(0.95 0.08 205 / 0.22)" }}
                 />
               ))}
-            </div>
-            {[26, 50, 74].map((t) => (
+              {/* atmosphere terminator */}
               <span
-                key={t}
-                className="absolute inset-x-0 border-t"
-                style={{ top: `${t}%`, borderColor: "oklch(0.92 0.10 210 / 0.30)" }}
+                className="absolute inset-0 rounded-full"
+                style={{ background: "linear-gradient(115deg, transparent 45%, oklch(0.10 0.03 265 / 0.65))" }}
               />
-            ))}
+            </div>
+            {/* atmospheric rim glow */}
+            <span
+              className="absolute inset-[-6px] rounded-full"
+              style={{ boxShadow: "0 0 24px 2px oklch(0.85 0.13 220 / 0.45) inset, 0 0 22px oklch(0.80 0.15 235 / 0.4)" }}
+            />
+            {/* orbit ring + satellite */}
+            <div className="absolute left-1/2 top-1/2 h-[196px] w-[196px] -translate-x-1/2 -translate-y-1/2 [transform-style:preserve-3d]">
+              <div
+                className="absolute inset-0 rounded-full border [animation:art-orbit-spin_9s_linear_infinite]"
+                style={{ borderColor: "oklch(0.88 0.13 235 / 0.5)", transform: "rotateX(74deg)" }}
+              >
+                <span
+                  className="absolute left-1/2 top-[-4px] size-2 -translate-x-1/2 rounded-full"
+                  style={{ background: "oklch(0.95 0.10 210)", boxShadow: "0 0 10px oklch(0.88 0.14 225)" }}
+                />
+              </div>
+            </div>
           </div>
-          {/* orbit ring */}
-          <span
-            className="absolute left-1/2 top-1/2 h-[190px] w-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full border [animation:art-orbit_9s_linear_infinite]"
-            style={{ borderColor: "oklch(0.85 0.14 235 / 0.55)", transform: "rotateX(74deg)" }}
-          />
         </div>
         <Art3DStyles />
       </div>
     );
   }
+
 
   // "os" — stacked holographic panels
   return (
