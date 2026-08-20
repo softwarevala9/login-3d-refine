@@ -115,18 +115,12 @@ function NexusLogin() {
     document.documentElement.lang = l.code;
     document.documentElement.dir = l.rtl ? "rtl" : "ltr";
   }, [lang]);
-  const [clock, setClock] = useState(() => new Date());
   const [otpSent, setOtpSent] = useState(false);
   const [ssoDomain, setSsoDomain] = useState("");
 
   useEffect(() => {
     const t = setTimeout(() => setStage("idle"), 2600);
     return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    const t = setInterval(() => setClock(new Date()), 1000);
-    return () => clearInterval(t);
   }, []);
 
   // Reset per-method transient state when switching methods.
@@ -265,16 +259,6 @@ function NexusLogin() {
       <CursorSpotlight />
 
 
-      {/* Top strip — language + clock only */}
-      <div className="relative z-20 mx-auto flex w-full max-w-[1600px] shrink-0 items-center justify-end gap-4 px-4 pt-2.5 sm:px-6 sm:pt-3 [animation:nx-fade-down_700ms_ease-out_both]">
-        <div className="flex shrink-0 items-center gap-2 text-[10px] text-white/70">
-          <LanguageSelect value={lang} onChange={setLang} />
-
-          <span className="hidden sm:inline tabular-nums text-white/50">
-            {clock.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
-          </span>
-        </div>
-      </div>
 
       {/* Main grid — one cohesive surface, never taller than the viewport */}
       <div className="relative z-10 mx-auto grid w-full max-w-[1600px] grid-cols-1 gap-3 px-4 py-3 lg:min-h-0 lg:flex-1 sm:px-6 lg:grid-cols-[290px_minmax(0,1fr)_330px] lg:gap-5 lg:overflow-hidden xl:grid-cols-[320px_minmax(0,1fr)_360px]">
@@ -297,6 +281,8 @@ function NexusLogin() {
             otpSent={otpSent}
             ssoDomain={ssoDomain} setSsoDomain={setSsoDomain}
             onQrAuthenticated={finishAuth}
+            lang={lang} setLang={setLang}
+            voice={voice} setVoice={setVoice}
             stage={stage}
           />
         </div>
@@ -563,12 +549,15 @@ function CenterPanel(props: {
   ssoDomain: string; setSsoDomain: (s: string) => void;
   onQrAuthenticated: () => void;
   stage: AIState;
+  lang: string; setLang: (s: string) => void;
+  voice: boolean; setVoice: (b: boolean) => void;
 }) {
   const {
     method, setMethod, identifier, setIdentifier, password, setPassword,
     showPw, setShowPw, remember, setRemember, submitting, attempts,
     onIdentifierFocus, onPasswordFocus, onBlur, onSubmit, onOAuth, stage,
     otpSent, ssoDomain, setSsoDomain, onQrAuthenticated,
+    lang, setLang, voice, setVoice,
   } = props;
 
   const methodMeta = METHODS.find((m) => m.id === method)!;
