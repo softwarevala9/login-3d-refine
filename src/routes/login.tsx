@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { z } from "zod";
 import {
   Mail, User, Phone, KeyRound, QrCode, ShieldCheck, Fingerprint, Eye, EyeOff,
-  Lock, Globe, Mic, MicOff, Building2,
+  Lock, Globe, Mic, MicOff, Building2, Volume2, VolumeX,
   Radio, Wifi, Server,
   CheckCircle2, AlertTriangle, ArrowRight, Crown, RefreshCcw,
 } from "lucide-react";
