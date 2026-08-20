@@ -474,7 +474,7 @@ function ShowcaseSlider() {
             }}
           >
             {/* 3D illustration fills the empty upper area of the slide */}
-            <div className="pointer-events-none absolute inset-x-0 top-8 bottom-[92px]">
+            <div className="pointer-events-none absolute inset-0 grid place-items-center pb-[84px] pt-8">
               <SlideArt3D kind={s.art} />
             </div>
             <span className="w-fit rounded-full bg-black/35 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-sky-100 shadow-[0_0_10px_oklch(0.7_0.18_250/0.45)] ring-1 ring-sky-300/40">
