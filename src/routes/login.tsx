@@ -795,10 +795,11 @@ function CenterPanel(props: {
             <button key={p.label} type="button"
               onClick={() => (p.provider ? onOAuth(p.provider) : setMethod("sso"))}
               disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2 text-[12px] font-medium text-white/80 shadow-[inset_0_1px_0_oklch(1_0_0/0.10),0_12px_24px_-18px_oklch(0_0_0/0.9)] ring-1 ring-white/10 transition-all hover:-translate-y-px hover:bg-white/[0.08] active:translate-y-0 disabled:opacity-50">
-              <span className="grid size-5 place-items-center rounded-md bg-white/10 text-[11px] font-bold">{p.letter || "⌥"}</span>
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-white/[0.10] to-white/[0.02] px-3 py-2 text-[12px] font-medium text-white/85 ring-1 ring-sky-300/25 shadow-[inset_0_1px_0_oklch(1_0_0/0.22),inset_0_-3px_8px_oklch(0_0_0/0.5),0_0_10px_oklch(0.72_0.20_250/0.18),0_14px_26px_-18px_oklch(0_0_0/0.95)] transition-all duration-300 hover:-translate-y-[1.5px] hover:ring-sky-200/60 hover:shadow-[inset_0_1px_0_oklch(1_0_0/0.3),inset_0_-3px_8px_oklch(0_0_0/0.5),0_0_18px_oklch(0.74_0.20_250/0.45),0_18px_32px_-18px_oklch(0_0_0/0.95)] active:translate-y-[1px] active:scale-[0.985] disabled:opacity-50">
+              <span className="grid size-5 place-items-center rounded-md bg-gradient-to-b from-white/25 to-white/5 text-[11px] font-bold shadow-[inset_0_1px_0_oklch(1_0_0/0.45),0_0_8px_oklch(0.72_0.20_250/0.35)]">{p.letter || "⌥"}</span>
               {p.label}
             </button>
+
           ))}
         </div>
 
