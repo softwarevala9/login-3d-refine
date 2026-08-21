@@ -375,11 +375,15 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
 function Art3DStyles() {
   return (
     <style>{`
-      @keyframes art-float { 0%,100% { transform: translate(-50%,-50%) translateY(-5px); } 50% { transform: translate(-50%,-50%) translateY(7px); } }
-      @keyframes art-pulse { 0%,100% { opacity: .55; transform: translate(-50%,-50%) scale(0.95); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+      @keyframes art-float { 0%,100% { transform: translateY(-5px); } 50% { transform: translateY(7px); } }
+      @keyframes art-pulse { 0%,100% { opacity: .55; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.08); } }
       @keyframes art-spin { to { transform: rotate(360deg); } }
       @keyframes art-orbit { 0% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(0deg); } 100% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(360deg); } }
+      @keyframes art-orbit-spin { 0% { transform: rotateX(74deg) rotateZ(0deg); } 100% { transform: rotateX(74deg) rotateZ(360deg); } }
       @keyframes art-lift { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.25); } }
+      @keyframes art-hue { 0%,100% { filter: hue-rotate(0deg) saturate(1); } 50% { filter: hue-rotate(28deg) saturate(1.18); } }
+      @keyframes art-sweep { 0% { transform: translateX(-40px) rotate(18deg); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateX(190px) rotate(18deg); opacity: 0; } }
+      @keyframes art-drift { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
     `}</style>
   );
 }
