@@ -338,16 +338,23 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
 
   // "os" — stacked holographic panels
   return (
-    <div className="pointer-events-none relative size-full [perspective:1000px]">
+    <div className="pointer-events-none grid size-full place-items-center [perspective:1000px]">
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [animation:art-float_6.5s_ease-in-out_infinite]"
+        className="relative size-[190px] [animation:art-float_6.5s_ease-in-out_infinite]"
         style={{ transformStyle: "preserve-3d" }}
       >
+        <span
+          aria-hidden
+          className="absolute inset-[-10%] -z-10 rounded-full blur-2xl [animation:art-pulse_5s_ease-in-out_infinite,art-hue_12s_linear_infinite]"
+          style={{ background: "radial-gradient(circle, oklch(0.70 0.19 255 / 0.6), transparent 70%)" }}
+        />
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="absolute left-1/2 top-1/2 h-[86px] w-[140px] -translate-x-1/2 -translate-y-1/2 rounded-xl"
+            className="absolute left-1/2 top-1/2 h-[86px] w-[140px] rounded-xl"
             style={{
+              marginLeft: -70,
+              marginTop: -43,
               transform: `rotateX(58deg) rotateZ(-38deg) translateZ(${i * 22}px)`,
               background:
                 "linear-gradient(135deg, oklch(0.62 0.17 258 / 0.85), oklch(0.30 0.12 268 / 0.85))",
@@ -361,11 +368,6 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
             <span className="absolute bottom-3 right-3 size-4 rounded-md bg-white/25" />
           </div>
         ))}
-        <span
-          aria-hidden
-          className="absolute left-1/2 top-1/2 -z-10 size-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl [animation:art-pulse_5s_ease-in-out_infinite]"
-          style={{ background: "radial-gradient(circle, oklch(0.70 0.19 255 / 0.6), transparent 70%)" }}
-        />
       </div>
       <Art3DStyles />
     </div>
@@ -375,11 +377,15 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
 function Art3DStyles() {
   return (
     <style>{`
-      @keyframes art-float { 0%,100% { transform: translate(-50%,-50%) translateY(-5px); } 50% { transform: translate(-50%,-50%) translateY(7px); } }
-      @keyframes art-pulse { 0%,100% { opacity: .55; transform: translate(-50%,-50%) scale(0.95); } 50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); } }
+      @keyframes art-float { 0%,100% { transform: translateY(-5px); } 50% { transform: translateY(7px); } }
+      @keyframes art-pulse { 0%,100% { opacity: .55; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.08); } }
       @keyframes art-spin { to { transform: rotate(360deg); } }
       @keyframes art-orbit { 0% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(0deg); } 100% { transform: translate(-50%,-50%) rotateX(74deg) rotateZ(360deg); } }
+      @keyframes art-orbit-spin { 0% { transform: rotateX(74deg) rotateZ(0deg); } 100% { transform: rotateX(74deg) rotateZ(360deg); } }
       @keyframes art-lift { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.25); } }
+      @keyframes art-hue { 0%,100% { filter: hue-rotate(0deg) saturate(1); } 50% { filter: hue-rotate(28deg) saturate(1.18); } }
+      @keyframes art-sweep { 0% { transform: translateX(-40px) rotate(18deg); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateX(190px) rotate(18deg); opacity: 0; } }
+      @keyframes art-drift { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
     `}</style>
   );
 }
