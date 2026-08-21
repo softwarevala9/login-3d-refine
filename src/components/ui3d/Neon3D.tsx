@@ -338,16 +338,23 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
 
   // "os" — stacked holographic panels
   return (
-    <div className="pointer-events-none relative size-full [perspective:1000px]">
+    <div className="pointer-events-none grid size-full place-items-center [perspective:1000px]">
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 [animation:art-float_6.5s_ease-in-out_infinite]"
+        className="relative size-[190px] [animation:art-float_6.5s_ease-in-out_infinite]"
         style={{ transformStyle: "preserve-3d" }}
       >
+        <span
+          aria-hidden
+          className="absolute inset-[-10%] -z-10 rounded-full blur-2xl [animation:art-pulse_5s_ease-in-out_infinite,art-hue_12s_linear_infinite]"
+          style={{ background: "radial-gradient(circle, oklch(0.70 0.19 255 / 0.6), transparent 70%)" }}
+        />
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="absolute left-1/2 top-1/2 h-[86px] w-[140px] -translate-x-1/2 -translate-y-1/2 rounded-xl"
+            className="absolute left-1/2 top-1/2 h-[86px] w-[140px] rounded-xl"
             style={{
+              marginLeft: -70,
+              marginTop: -43,
               transform: `rotateX(58deg) rotateZ(-38deg) translateZ(${i * 22}px)`,
               background:
                 "linear-gradient(135deg, oklch(0.62 0.17 258 / 0.85), oklch(0.30 0.12 268 / 0.85))",
@@ -361,11 +368,6 @@ export function SlideArt3D({ kind }: { kind: "os" | "shield" | "globe" }) {
             <span className="absolute bottom-3 right-3 size-4 rounded-md bg-white/25" />
           </div>
         ))}
-        <span
-          aria-hidden
-          className="absolute left-1/2 top-1/2 -z-10 size-[190px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-2xl [animation:art-pulse_5s_ease-in-out_infinite]"
-          style={{ background: "radial-gradient(circle, oklch(0.70 0.19 255 / 0.6), transparent 70%)" }}
-        />
       </div>
       <Art3DStyles />
     </div>
